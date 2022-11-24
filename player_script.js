@@ -269,10 +269,10 @@ function play_music() {
 			if (durationMinutes < 10) {
 				durationMinutes = "0" + durationMinutes;
 			}
-			currentTime.textContent = "-" + getTimeCodeFromNum(audio.duration - audio.currentTime);
-			document.querySelector("#durationTime").textContent = getTimeCodeFromNum(audio.duration);
-			// currentTime.textContent = currentMinutes + ":" + currentSeconds;
-			// durationTime.textContent = durationMinutes + ":" + durationSeconds;
+			// currentTime.textContent = "-" + getTimeCodeFromNum(audio.duration - audio.currentTime);
+			// document.querySelector("#durationTime").textContent = getTimeCodeFromNum(audio.duration);
+			currentTime.textContent = currentMinutes + ":" + currentSeconds;
+			durationTime.textContent = durationMinutes + ":" + durationSeconds;
 		}
 	}
 

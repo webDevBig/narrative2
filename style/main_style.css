@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "RobotoRegular";
+  src: url(../font/roboto/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family: "RobotoMedium";
+  src: url(../font/roboto/Roboto-Medium.ttf);
+}
+@font-face {
+  font-family: "RobotoLight";
+  src: url(../font/roboto/Roboto-Light.ttf);
+}
 * {
   margin: 0;
   padding: 0;
@@ -98,7 +110,7 @@ header .nav span {
   margin: 12px auto 32px;
 }
 .date_box .date_text {
-  font-family: "Roboto", sans-serif;
+  font-family: "RobotoRegular";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -106,7 +118,7 @@ header .nav span {
 }
 
 .title {
-  font-family: "Roboto", sans-serif;
+  font-family: "RobotoLight";
   font-style: normal;
   font-weight: 300;
   font-size: 48px;
@@ -205,7 +217,7 @@ header .nav span {
   line-height: 33px;
   text-align: center;
   color: #BDBDBD;
-  font-family: "Roboto", sans-serif;
+  font-family: "RobotoRegular";
   cursor: default;
 }
 
@@ -215,7 +227,7 @@ header .nav span {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  font-family: "Roboto", sans-serif;
+  font-family: "RobotoRegular";
 }
 .title_section h6 {
   font-weight: 400;
@@ -295,8 +307,7 @@ header .nav span {
   position: relative;
 }
 .player_section .title_box .current_title {
-  font-family: "Roboto", sans-serif;
-  font-style: normal;
+  font-family: "RobotoMedium", sans-serif;
   font-weight: 500;
   font-size: 20px;
   line-height: 23px;
@@ -312,8 +323,8 @@ header .nav span {
   align-items: center;
 }
 .player_section .volume_text {
-  font-family: "Roboto", sans-serif;
-  font-weight: 600;
+  font-family: "RobotoMedium", sans-serif;
+  font-weight: 500;
   font-size: 16px;
   line-height: 19px;
   color: #999999;
@@ -381,8 +392,8 @@ header .nav span {
   transition: all 0.2s;
 }
 .speed .speedValue {
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
+  font-family: "RobotoRegular", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 19px;
   color: #414141;
@@ -448,14 +459,15 @@ header .nav span {
   cursor: pointer;
   margin: 0 17px;
   background-image: url("../img/play.svg");
-  background-position: center;
+  background-position: 56% 50%;
   background-repeat: no-repeat;
-  background-size: 16px;
-  transition: all 0.2s;
+  background-size: 20px;
+  transition: background-color 0.2s;
 }
 .controler_box .play_btn.pause {
   background-image: url("../img/pause.svg");
   background-size: 16px;
+  background-position: center;
 }
 .controler_box .play_btn:hover, .controler_box .play_btn:disabled {
   background-color: #5B88FF;
@@ -486,9 +498,9 @@ header .nav span {
   position: absolute;
   color: #414141;
   font-size: 10px;
-  font-weight: bold;
+  font-weight: 400;
   padding: 6px 0 0;
-  font-family: "Roboto";
+  font-family: "RobotoRegular", sans-serif;
   transition: all 0.2s;
 }
 .controler_box .return:hover::after, .controler_box .return:disabled::after {
@@ -583,7 +595,7 @@ header .nav span {
   display: flex;
   align-items: center;
   color: #414141;
-  font-family: "Roboto", sans-serif;
+  font-family: "RobotoRegular";
   min-width: 30px;
   cursor: default;
 }
@@ -933,8 +945,10 @@ input[type=range]::-ms-track {
   }
   .audio_player {
     width: 100%;
-    margin: 12px 0 37px;
+    min-height: 45px;
+    margin: 12px 0 0px;
     position: relative;
+    align-items: flex-start;
   }
   .audio_player .timeline {
     width: 100%;
@@ -943,7 +957,7 @@ input[type=range]::-ms-track {
   .audio_player #durationTime,
 .audio_player #currentTime {
     position: absolute;
-    top: calc(100% + 10px);
+    top: 15px;
   }
   .audio_player #durationTime {
     left: 0;
@@ -958,7 +972,7 @@ input[type=range]::-ms-track {
     height: 226px;
   }
   #player_here.sticky .player_section {
-    height: 200px;
+    height: 225px;
     padding: 16px 16px 20px;
     left: 0;
     box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.12);
@@ -968,6 +982,15 @@ input[type=range]::-ms-track {
     top: 16px;
     right: 5px;
     background-color: transparent;
+  }
+  #player_here.sticky .player_section .arrow.colapse {
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
+  #player_here.sticky .player_section .arrow.colapse::after {
+    background-position: 20px 50%;
   }
   #player_here.sticky .player_section .arrow::after {
     filter: invert(1);
@@ -990,6 +1013,7 @@ input[type=range]::-ms-track {
     height: 27px;
     background-size: 8px;
     margin: 0;
+    z-index: 10;
   }
   #player_here.sticky .player_section.resize .info_box {
     width: 100%;
@@ -1076,6 +1100,9 @@ input[type=range]::-ms-track {
   }
   #player_here.sticky .player_section.resize .info_box .current_title {
     max-width: 84%;
+  }
+  .speed .speedPop_Up {
+    left: 0px;
   }
 }
 @media all and (max-width: 330px) {

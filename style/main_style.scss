@@ -1,5 +1,5 @@
 $body-text-color:#2E2E2E;
-$font-family1:'Roboto';
+
 $color-title:#DD2747;
 
 $--narrativ-background-color:#F5F5F5;
@@ -11,14 +11,38 @@ $--narrativ-color-text:#414141;
 $--narrativ-color-text-hover:#606060;
 $--narrativ-color-resize: #FDFDFD;
 $--narrativ-color-fill-resize: #E4ECFF;
-$--narrativ-font-family:'Roboto';
+
 $--narrativ-font-size:12px;
+
+@font-face {
+    font-family: "RobotoRegular";
+    src: url(../font/roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family: "RobotoMedium";
+    src: url(../font/roboto/Roboto-Medium.ttf);
+}
+
+@font-face {
+    font-family: "RobotoLight";
+    src: url(../font/roboto/Roboto-Light.ttf);
+}
+
+// @font-face {
+//     font-family: "RobotoRegular", sans-serif;
+//     src: url(../font/roboto/Roboto-Regular.ttf);
+// }
+$--narrativ-font-familyRegular:"RobotoRegular";
+$--narrativ-font-familyMedium:"RobotoMedium";
+$--narrativ-font-familyLight:"RobotoLight";
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 @keyframes fadeInOut {
     from {
         opacity: 0;
@@ -75,6 +99,7 @@ header {
     img {
         max-width: 100%;
     }
+
     .nav {
         width: 24px;
         height: 24px;
@@ -104,7 +129,7 @@ header {
     margin: 12px auto 32px;
 
     .date_text {
-        font-family: $font-family1, sans-serif;
+        font-family: $--narrativ-font-familyRegular;
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
@@ -113,7 +138,7 @@ header {
 }
 
 .title {
-    font-family: $font-family1, sans-serif;
+    font-family: $--narrativ-font-familyLight;
     font-style: normal;
     font-weight: 300;
     font-size: 48px;
@@ -193,6 +218,7 @@ header {
         margin-left: 32px;
     }
 }
+
 // style for social media in mobile
 .social_box {
     width: 100%;
@@ -219,10 +245,11 @@ header {
         line-height: 33px;
         text-align: center;
         color: #BDBDBD;
-        font-family: $font-family1, sans-serif;
+        font-family: $--narrativ-font-familyRegular;
         cursor: default;
     }
 }
+
 // style for title section in mobile
 .title_section {
     padding: 24px 0 0;
@@ -230,7 +257,7 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    font-family: $font-family1, sans-serif;
+    font-family: $--narrativ-font-familyRegular;
 
     h6 {
         font-weight: 400;
@@ -318,8 +345,7 @@ header {
         }
 
         .current_title {
-            font-family: $--narrativ-font-family, sans-serif;
-            font-style: normal;
+            font-family: $--narrativ-font-familyMedium, sans-serif;
             font-weight: 500;
             font-size: 20px;
             line-height: 23px;
@@ -340,8 +366,8 @@ header {
     }
 
     .volume_text {
-        font-family: $--narrativ-font-family, sans-serif;
-        font-weight: 600;
+        font-family: $--narrativ-font-familyMedium, sans-serif;
+        font-weight: 500;
         font-size: 16px;
         line-height: 19px;
         color: #999999;
@@ -353,6 +379,7 @@ header {
     }
 
 }
+
 // style for animation when music sound
 .musicBar_animation {
     width: 80px;
@@ -417,8 +444,8 @@ header {
     transition: all .2s;
 
     .speedValue {
-        font-family: $--narrativ-font-family, sans-serif;
-        font-weight: 500;
+        font-family: $--narrativ-font-familyRegular, sans-serif;
+        font-weight: 400;
         font-size: 16px;
         line-height: 19px;
         color: $--narrativ-color-text;
@@ -458,6 +485,7 @@ header {
     }
 
 }
+
 // when post roll play
 .player_box {
     &.inActive {
@@ -496,14 +524,15 @@ header {
         cursor: pointer;
         margin: 0 17px;
         background-image: url("../img/play.svg");
-        background-position: center;
+        background-position: 56% 50%;
         background-repeat: no-repeat;
-        background-size: 16px;
-        transition: all .2s;
+        background-size: 20px;
+        transition: background-color .2s;
 
         &.pause {
             background-image: url("../img/pause.svg");
             background-size: 16px;
+            background-position: center;
         }
 
         &:hover,
@@ -540,9 +569,9 @@ header {
             position: absolute;
             color: $--narrativ-color-text;
             font-size: 10px;
-            font-weight: bold;
+            font-weight: 400;
             padding: 6px 0 0;
-            font-family: $font-family1;
+            font-family: $--narrativ-font-familyRegular, sans-serif;
             transition: all .2s;
         }
 
@@ -577,7 +606,6 @@ header {
         background-position: 0% 50%;
         background-repeat: no-repeat;
         background-size: 20px;
-        // transition: all .2s;
 
         &.mute {
             background-image: url("../img/mute.svg");
@@ -664,7 +692,7 @@ header {
         display: flex;
         align-items: center;
         color: $--narrativ-color-text;
-        font-family: $--narrativ-font-family, sans-serif;
+        font-family: $--narrativ-font-familyRegular;
         min-width: 30px;
         cursor: default;
     }
@@ -870,6 +898,7 @@ header {
         }
     }
 }
+
 .mobile {
     display: none;
 }
@@ -896,10 +925,11 @@ input[type="range"]::-moz-range-thumb {
     border-radius: 50%;
     background: $--narrativ-color-progress;
     cursor: pointer;
+
     &:hover {
         background: $--narrativ-color-progress-hover;
     }
-    
+
 }
 
 input[type="range"]::-ms-thumb {
@@ -909,7 +939,7 @@ input[type="range"]::-ms-thumb {
     border-radius: 50%;
     background: $--narrativ-color-progress;
     cursor: pointer;
-   
+
     &:hover {
         background: $--narrativ-color-progress-hover;
     }
@@ -997,6 +1027,7 @@ input[type="range"]::-ms-track {
     @mixin contentView() {
         max-width: 600px;
     }
+
     header {
         box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.05);
         padding: 24px 0;
@@ -1016,6 +1047,7 @@ input[type="range"]::-ms-track {
             display: none;
         }
     }
+
     .main_img,
     .article_box,
     .date_box,
@@ -1040,6 +1072,7 @@ input[type="range"]::-ms-track {
     .article_box {
         @include contentView();
     }
+
     .title_section {
         @include contentView();
         display: flex;
@@ -1118,8 +1151,10 @@ input[type="range"]::-ms-track {
 
     .audio_player {
         width: 100%;
-        margin: 12px 0 37px;
+        min-height: 45px;
+        margin: 12px 0 0px;
         position: relative;
+        align-items: flex-start;
 
         .timeline {
             width: 100%;
@@ -1129,7 +1164,7 @@ input[type="range"]::-ms-track {
         #durationTime,
         #currentTime {
             position: absolute;
-            top: calc(100% + 10px);
+            top: 15px;
         }
 
         #durationTime {
@@ -1152,7 +1187,7 @@ input[type="range"]::-ms-track {
             height: 226px;
 
             .player_section {
-                height: 200px;
+                height: 225px;
                 padding: 16px 16px 20px;
                 left: 0;
                 box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.12);
@@ -1162,6 +1197,17 @@ input[type="range"]::-ms-track {
                     top: 16px;
                     right: 5px;
                     background-color: transparent;
+
+                    &.colapse {
+                        top: 0;
+                        right: 0;
+                        width: 100%;
+                        height: 100%;
+
+                        &::after {
+                            background-position: 20px 50%;
+                        }
+                    }
 
                     &::after {
                         filter: invert(1);
@@ -1189,6 +1235,7 @@ input[type="range"]::-ms-track {
                         height: 27px;
                         background-size: 8px;
                         margin: 0;
+                        z-index: 10;
                     }
 
                     .info_box {
@@ -1246,6 +1293,7 @@ input[type="range"]::-ms-track {
     .article_box {
         @include contentView();
     }
+
     header {
         margin: 0 0 24px;
 
@@ -1303,7 +1351,14 @@ input[type="range"]::-ms-track {
             }
         }
     }
+
+    .speed {
+        .speedPop_Up {
+            left: 0px;
+        }
+    }
 }
+
 @media all and (max-width:330px) {
     header {
         .content {
