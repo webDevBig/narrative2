@@ -29,10 +29,7 @@ $--narrativ-font-size:12px;
     src: url(../font/roboto/Roboto-Light.ttf);
 }
 
-// @font-face {
-//     font-family: "RobotoRegular", sans-serif;
-//     src: url(../font/roboto/Roboto-Regular.ttf);
-// }
+
 $--narrativ-font-familyRegular:"RobotoRegular";
 $--narrativ-font-familyMedium:"RobotoMedium";
 $--narrativ-font-familyLight:"RobotoLight";
@@ -308,7 +305,7 @@ header {
 }
 
 // style for player section. main
-.player_section {
+.narrativ-player_section {
     @include contentView();
     background: #F5F5F5;
     box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.12);
@@ -317,24 +314,24 @@ header {
     align-items: center;
     transition: all .3s;
 
-    .info_box {
+    .narrativ-info_box {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
 
-        .volume_text {
+        .narrativ-volume_text {
             display: none;
         }
     }
 
-    .title_box {
+    .narrativ-title_box {
         display: flex;
         max-width: 320px;
         align-items: center;
         justify-content: flex-start;
 
-        .current_photo {
+        .narrativ-current_photo {
             width: 80px;
             height: 80px;
             background-image: url('../img/img.png');
@@ -344,7 +341,7 @@ header {
             position: relative;
         }
 
-        .current_title {
+        .narrativ-current_title {
             font-family: $--narrativ-font-familyMedium, sans-serif;
             font-weight: 500;
             font-size: 20px;
@@ -357,7 +354,7 @@ header {
         }
     }
 
-    .volume_box {
+    .narrativ-volume_box {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -365,7 +362,7 @@ header {
 
     }
 
-    .volume_text {
+    .narrativ-volume_text {
         font-family: $--narrativ-font-familyMedium, sans-serif;
         font-weight: 500;
         font-size: 16px;
@@ -381,7 +378,7 @@ header {
 }
 
 // style for animation when music sound
-.musicBar_animation {
+.narrativ-musicBar_animation {
     width: 80px;
     height: 80px;
     display: flex;
@@ -390,7 +387,7 @@ header {
     background: linear-gradient(0deg, rgba(64, 64, 64, 0.4), rgba(64, 64, 64, 0.4));
     border-radius: 8px;
 
-    &.play {
+    &.narrativ-play {
         span {
             animation: pulse 1s linear infinite;
         }
@@ -438,12 +435,12 @@ header {
 }
 
 // style for speed pop Up
-.speed {
+.narrativ-speed {
     position: absolute;
     left: 0;
     transition: all .2s;
 
-    .speedValue {
+    .narrativ-speedValue {
         font-family: $--narrativ-font-familyRegular, sans-serif;
         font-weight: 400;
         font-size: 16px;
@@ -465,7 +462,7 @@ header {
         }
     }
 
-    .speedPop_Up {
+    .narrativ-speedPop_Up {
         background: #F5F5F5;
         box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.12);
         border-radius: 8px;
@@ -487,16 +484,16 @@ header {
 }
 
 // when post roll play
-.player_box {
+.narrativ-player_box {
     &.inActive {
         position: relative;
 
         &::after {
             width: 100%;
-            height: 100%;
+            height: 30%;
             content: '';
             position: absolute;
-            top: 0;
+            bottom: 0%;
             left: 0;
             background-color: transparent;
             z-index: 10;
@@ -506,7 +503,7 @@ header {
 }
 
 // style for conroler section with button
-.controler_box {
+.narrativ-controler_box {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -514,7 +511,7 @@ header {
     position: relative;
     margin: 0 0 20px;
 
-    .play_btn {
+    .narrativ-play_btn {
         width: 51px;
         height: 51px;
         background-color: $--narrativ-color-progress;
@@ -529,7 +526,7 @@ header {
         background-size: 20px;
         transition: background-color .2s;
 
-        &.pause {
+        &.narrativ-pause {
             background-image: url("../img/pause.svg");
             background-size: 16px;
             background-position: center;
@@ -541,7 +538,7 @@ header {
         }
     }
 
-    .return {
+    .narrativ-return {
         width: 30px;
         height: 35px;
         background-color: transparent;
@@ -580,7 +577,7 @@ header {
             color: $--narrativ-color-text-hover;
         }
 
-        &.return_forward {
+        &.narrativ-return_forward {
             transform: scaleX(-1);
 
             &::after {
@@ -593,12 +590,12 @@ header {
 }
 
 // style for volume section
-.volume {
+.narrativ-volume {
     margin: 0 0 20px;
     display: flex;
     align-items: center;
 
-    .volume_icon {
+    .narrativ-volume_icon {
         margin: 0 11px 0 0;
         max-width: 20px;
         width: 20px;
@@ -679,14 +676,14 @@ header {
 }
 
 // style for audio player
-.audio_player {
+.narrativ-audio_player {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    #currentTime,
-    #durationTime {
+    .narrativ-currentTime,
+    .narrativ-durationTime {
         font-weight: 500;
         font-size: $--narrativ-font-size;
         line-height: 14px;
@@ -698,7 +695,7 @@ header {
         cursor: default;
     }
 
-    .timeline {
+    .narrativ-timeline {
         background: $--narrativ-color-fill;
         width: 446px;
         height: 4px;
@@ -708,7 +705,7 @@ header {
         border-radius: 16px;
         display: flex;
 
-        .seek_slider {
+        .narrativ-seek_slider {
             -webkit-appearance: none;
             width: 100%;
             height: 100%;
@@ -722,7 +719,7 @@ header {
         }
 
         &:hover {
-            .seek_slider {
+            .narrativ-seek_slider {
                 background-image: linear-gradient($--narrativ-color-progress-hover, $--narrativ-color-progress-hover);
             }
         }
@@ -732,12 +729,12 @@ header {
 }
 
 // style for player when scroll and fixed it
-#player_here {
+#narrativ-player_here {
     &.sticky {
         height: 127px;
 
 
-        .player_section {
+        .narrativ-player_section {
             margin: 0;
             position: fixed;
             bottom: 0;
@@ -755,13 +752,13 @@ header {
                 transition: all .5s;
                 padding: 12px;
 
-                .current_photo,
-                .audio_player,
-                .volume_text {
+                .narrativ-current_photo,
+                .narrativ-audio_player,
+                .narrativ-volume_text {
                     display: none;
                 }
 
-                .arrow {
+                .narrativ-arrow {
                     background-color: $--narrativ-color-fill;
 
                     &.colapse::after {
@@ -769,24 +766,28 @@ header {
                     }
                 }
 
-                .play_btn {
+                .narrativ-play_btn {
                     background-color: $--narrativ-color-resize;
                     background-image: url('../img/play-blue.svg');
                     transition: all .2s;
 
-                    &.pause {
+                    &.narrativ-pause {
                         background-image: url('../img/pause-blue.svg');
                     }
                 }
 
-                .player_box {
+                .narrativ-player_box {
                     width: 522px;
+                    &.inActive::after
+                    {
+                        display: none;
+                    }
                 }
 
-                .controler_box {
+                .narrativ-controler_box {
                     margin: 0;
 
-                    .return {
+                    .narrativ-return {
                         background-image: url('../img/return-white.svg');
 
                         &::after {
@@ -795,7 +796,7 @@ header {
                     }
                 }
 
-                .current_title {
+                .narrativ-current_title {
                     max-width: 355px;
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -806,10 +807,10 @@ header {
                     }
                 }
 
-                .volume {
+                .narrativ-volume {
                     margin: 0;
 
-                    .volume_icon {
+                    .narrativ-volume_icon {
                         background-image: url('../img/volume-white.svg');
                         transition: all .3s;
 
@@ -819,13 +820,13 @@ header {
                     }
                 }
 
-                .speed {
-                    .speedValue {
+                .narrativ-speed {
+                    .narrativ-speedValue {
                         color: $--narrativ-color-resize;
 
                     }
 
-                    .speedPop_Up {
+                    .narrativ-speedPop_Up {
                         background-color: $--narrativ-background-color-resize;
                         box-shadow: 4px 0px 15px rgb(0 0 0 / 32%);
                     }
@@ -868,7 +869,7 @@ header {
                 }
             }
 
-            .arrow {
+            .narrativ-arrow {
                 position: absolute;
                 background: #4169E1;
                 border-radius: 50%;
@@ -893,7 +894,7 @@ header {
 
             }
 
-            .player_box {
+            .narrativ-player_box {
                 margin: 0 85px 0 81px;
             }
         }
@@ -980,42 +981,42 @@ input[type="range"]::-ms-track {
     .content,
     .date_box,
     .title,
-    .player_section,
+    .narrativ-player_section,
     .main_img,
     .article_box {
         @include contentView();
     }
 
-    .audio_player {
-        .timeline {
+    .narrativ-audio_player {
+        .narrativ-timeline {
             width: 300px;
         }
 
     }
 
-    .player_section {
-        .title_box {
-            .current_title {
+    .narrativ-player_section {
+        .narrativ-title_box {
+            .narrativ-current_title {
                 font-size: 16px;
                 max-width: 150px;
             }
         }
     }
 
-    #player_here {
+    #narrativ-player_here {
         &.sticky {
-            .player_section {
+            .narrativ-player_section {
                 &.resize {
-                    .player_box {
+                    .narrativ-player_box {
                         width: 376px;
                     }
 
-                    .current_title {
+                    .narrativ-current_title {
                         max-width: 246px;
                     }
                 }
 
-                .player_box {
+                .narrativ-player_box {
                     margin: 0 50px;
                     background: transparent;
                 }
@@ -1068,7 +1069,7 @@ input[type="range"]::-ms-track {
     .content,
     .date_box,
     .title,
-    .player_section,
+    .narrativ-player_section,
     .main_img,
     .article_box {
         @include contentView();
@@ -1096,12 +1097,12 @@ input[type="range"]::-ms-track {
         }
     }
 
-    .player_section {
+    .narrativ-player_section {
         flex-direction: column;
         border-radius: 8px;
 
 
-        .title_box {
+        .narrativ-title_box {
             max-width: 100%;
             width: 100%;
 
@@ -1109,7 +1110,7 @@ input[type="range"]::-ms-track {
                 max-width: 60px;
             }
 
-            .current_title {
+            .narrativ-current_title {
                 max-width: 100%;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -1117,84 +1118,91 @@ input[type="range"]::-ms-track {
             }
         }
 
-        .info_box {
+        .narrativ-info_box {
             flex-direction: column-reverse;
             max-width: calc(100% - 96px);
 
-            .volume_text {
+            .narrativ-volume_text {
                 display: block;
                 margin: 0 0 8px;
             }
         }
 
-        .volume_box {
+        .narrativ-volume_box {
             display: none;
         }
 
-        .volume_text {
+        .narrativ-volume_text {
             img {
                 margin: 0 0 0 3px;
             }
         }
     }
 
-    .player_box {
+    .narrativ-player_box {
         display: flex;
         flex-direction: column-reverse;
         width: 100%;
         justify-content: flex-start;
         align-items: flex-start;
+
+        &.inActive::after
+        {
+            bottom: 55%;
+            height: 40%;
+            // background-color: red;
+        }
     }
 
-    .controler_box {
+    .narrativ-controler_box {
         margin: 0;
     }
 
-    .audio_player {
+    .narrativ-audio_player {
         width: 100%;
         min-height: 45px;
         margin: 12px 0 0px;
         position: relative;
         align-items: flex-start;
 
-        .timeline {
+        .narrativ-timeline {
             width: 100%;
             margin: 0;
         }
 
-        #durationTime,
-        #currentTime {
+        .narrativ-durationTime,
+        .narrativ-currentTime {
             position: absolute;
             top: 15px;
         }
 
-        #durationTime {
-            left: 0;
-        }
-
-        #currentTime {
+        .narrativ-durationTime {
             right: 0;
         }
-    }
 
-    .speed {
-        .speedPop_Up {
-            left: -33px;
+        .narrativ-currentTime {
+            left: 0;
+        }
+    }
+    
+    .narrativ-speed {
+        .narrativ-speedPop_Up {
+            left: 0px;
         }
     }
 
-    #player_here {
+    #narrativ-player_here {
         &.sticky {
             height: 226px;
-
-            .player_section {
+            
+            .narrativ-player_section {
                 height: 225px;
                 padding: 16px 16px 20px;
                 left: 0;
                 box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.12);
                 border-radius: 8px 8px 0px 0px;
 
-                .arrow {
+                .narrativ-arrow {
                     top: 16px;
                     right: 5px;
                     background-color: transparent;
@@ -1218,7 +1226,7 @@ input[type="range"]::-ms-track {
                 &.resize {
                     height: 64px;
 
-                    .arrow {
+                    .narrativ-arrow {
                         background-color: transparent;
 
                         &::after {
@@ -1226,12 +1234,12 @@ input[type="range"]::-ms-track {
                         }
                     }
 
-                    .speed,
-                    .return {
+                    .narrativ-speed,
+                    .narrativ-return {
                         display: none;
                     }
 
-                    .play_btn {
+                    .narrativ-play_btn {
                         width: 27px;
                         height: 27px;
                         background-size: 8px;
@@ -1239,11 +1247,11 @@ input[type="range"]::-ms-track {
                         z-index: 10;
                     }
 
-                    .info_box {
+                    .narrativ-info_box {
                         width: 100%;
                         max-width: 100%;
 
-                        .current_title {
+                        .narrativ-current_title {
                             width: 100%;
                             max-width: 100%;
                             font-weight: 500;
@@ -1252,7 +1260,7 @@ input[type="range"]::-ms-track {
                         }
                     }
 
-                    .player_box {
+                    .narrativ-player_box {
                         position: absolute;
                         width: 60px;
                         right: 50px;
@@ -1261,7 +1269,7 @@ input[type="range"]::-ms-track {
                         animation-fill-mode: forwards;
                         transition: all .3s;
 
-                        & .controler_box {
+                        & .narrativ-controler_box {
                             justify-content: flex-end;
                         }
                     }
@@ -1290,7 +1298,7 @@ input[type="range"]::-ms-track {
     }
 
     .content,
-    .player_section,
+    .narrativ-player_section,
     .article_box {
         @include contentView();
     }
@@ -1307,11 +1315,11 @@ input[type="range"]::-ms-track {
         @include contentView();
     }
 
-    .player_section {
+    .narrativ-player_section {
         padding: 16px 16px 20px;
     }
 
-    #player_here {
+    #narrativ-player_here {
         padding: 0 24px;
     }
 
@@ -1339,12 +1347,12 @@ input[type="range"]::-ms-track {
         }
     }
 
-    #player_here {
+    #narrativ-player_here {
         &.sticky {
-            .player_section {
+            .narrativ-player_section {
                 &.resize {
-                    .info_box {
-                        .current_title {
+                    .narrativ-info_box {
+                        .narrativ-current_title {
                             max-width: 84%;
                         }
                     }
@@ -1353,11 +1361,6 @@ input[type="range"]::-ms-track {
         }
     }
 
-    .speed {
-        .speedPop_Up {
-            left: 0px;
-        }
-    }
 }
 
 @media all and (max-width:330px) {

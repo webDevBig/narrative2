@@ -1,29 +1,29 @@
 function create_player() {
 	const player_container = document.createElement("div");
-	player_container.setAttribute('id', "player_here")
+	player_container.setAttribute('id', "narrativ-player_here")
 
 	const player_section = document.createElement("div");
-	player_section.setAttribute('class', 'player_section')
+	player_section.setAttribute('class', 'narrativ-player_section')
 
 	// add arrow
 	const arrow = document.createElement("div");
-	arrow.setAttribute('class', 'arrow');
+	arrow.setAttribute('class', 'narrativ-arrow');
 
 	// add title box
 	const title_box = document.createElement("div");
-	title_box.setAttribute('class', 'title_box');
+	title_box.setAttribute('class', 'narrativ-title_box');
 
 	// add song img
 	const img = document.createElement("div");
-	img.setAttribute('class', 'current_photo');
+	img.setAttribute('class', 'narrativ-current_photo');
 
 	// create music bar animation
 	const musicBar_animation = document.createElement("div");
-	musicBar_animation.setAttribute('class', 'musicBar_animation');
+	musicBar_animation.setAttribute('class', 'narrativ-musicBar_animation');
 
 	for (var i = 0; i <= 7; i++) {
 		const musicBar_item = document.createElement("span");
-		musicBar_item.setAttribute("class", "musicBar_item")
+		musicBar_item.setAttribute("class", "narrativ-musicBar_item")
 		musicBar_animation.append(musicBar_item)
 	}
 
@@ -31,13 +31,13 @@ function create_player() {
 
 	// add track name
 	const current_title = document.createElement("p");
-	current_title.setAttribute('class', 'current_title');
+	current_title.setAttribute('class', 'narrativ-current_title');
 
 	// add title under volume
 	const volume_text = document.createElement("p");
-	volume_text.setAttribute('class', 'volume_text');
+	volume_text.setAttribute('class', 'narrativ-volume_text');
 	const volume_textM = document.createElement("p");
-	volume_textM.setAttribute('class', 'volume_text');
+	volume_textM.setAttribute('class', 'narrativ-volume_text');
 
 	const imgV = document.createElement("img");
 	imgV.setAttribute('src', 'img/Logo-Narrativ-Letter.svg');
@@ -51,7 +51,7 @@ function create_player() {
 	volume_textM.append('Powered by', imgVM)
 
 	const info_box = document.createElement("div");
-	info_box.setAttribute('class', 'info_box');
+	info_box.setAttribute('class', 'narrativ-info_box');
 
 	info_box.append(current_title, volume_textM)
 	title_box.append(img, info_box);
@@ -59,31 +59,31 @@ function create_player() {
 
 	// add player box 
 	const player_box = document.createElement("div");
-	player_box.setAttribute("class", "player_box");
+	player_box.setAttribute("class", "narrativ-player_box");
 
 	// add controler box 
 	const controler_box = document.createElement("div");
-	controler_box.setAttribute("class", "controler_box");
+	controler_box.setAttribute("class", "narrativ-controler_box");
 
 	// add speed section with pop up
 	const speed = document.createElement("div");
-	speed.setAttribute("class", "speed")
+	speed.setAttribute("class", "narrativ-speed")
 
 	const speedValue = document.createElement("button");
-	speedValue.setAttribute("class", "speedValue")
-	speedValue.setAttribute("id", "openSpeedPopUp")
+	speedValue.setAttribute("class", "narrativ-speedValue")
+	speedValue.setAttribute("id", "narrativ-openSpeedPopUp")
 	speedValue.textContent = '1x';
 	// 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2
 
 
 	// create list of speed value
 	const speedPop_Up = document.createElement("div");
-	speedPop_Up.setAttribute("class", "speedPop_Up")
+	speedPop_Up.setAttribute("class", "narrativ-speedPop_Up")
 	var directory = ['0.5x', '0.75x', '1x', '1.25x', '1.5x', '1.75x', '2x'];
 
 	for (var i = 0; i <= directory.length - 1; i++) {
 		const speedValueItem = document.createElement("a");
-		speedValueItem.setAttribute("class", "speedValueItem speedValue")
+		speedValueItem.setAttribute("class", "narrativ-speedValueItem narrativ-speedValue")
 		speedValueItem.textContent = directory[i];
 		speedPop_Up.append(speedValueItem)
 	}
@@ -94,18 +94,18 @@ function create_player() {
 	// add btn's
 	// return_back
 	const return_back = document.createElement("button");
-	return_back.setAttribute("class", "return return_back");
-	return_back.setAttribute("id", "return_back")
+	return_back.setAttribute("class", "narrativ-return narrativ-return_back");
+	return_back.setAttribute("id", "narrativ-return_back")
 
 	// play
 	const play_btn = document.createElement("button");
-	play_btn.setAttribute("class", "play_btn toggle-play play");
-	play_btn.setAttribute("id", "playToggle")
+	play_btn.setAttribute("class", "narrativ-play_btn toggle-play narrativ-play");
+	play_btn.setAttribute("id", "narrativ-playToggle")
 
 	// return_forward
 	const return_forward = document.createElement("button");
-	return_forward.setAttribute("class", "return return_forward");
-	return_forward.setAttribute("id", "return_forward")
+	return_forward.setAttribute("class", "narrativ-return narrativ-return_forward");
+	return_forward.setAttribute("id", "narrativ-return_forward")
 
 	controler_box.append(speed, return_back, play_btn, return_forward)
 
@@ -113,31 +113,31 @@ function create_player() {
 
 	// add audio player
 	const audio_player = document.createElement("div");
-	audio_player.setAttribute("class", "audio_player");
-	audio_player.setAttribute("id", "player");
+	audio_player.setAttribute("class", "narrativ-audio_player");
+	audio_player.setAttribute("id", "narrativ-player");
 
 	const audio = document.createElement("audio");
-	audio.setAttribute("id", "audio");
+	audio.setAttribute("id", "narrativ-audio");
 	audio.setAttribute("autoplay", "true");
 
 	// add duration time of track
 	const durationTime = document.createElement("span");
 	durationTime.setAttribute("id", "durationTime")
-	durationTime.setAttribute("class", "current")
+	durationTime.setAttribute("class", "narrativ-current narrativ-durationTime")
 
 	// add current time for track
 	const currentTime = document.createElement("span");
 	currentTime.setAttribute("id", "currentTime")
-	currentTime.setAttribute("class", "current")
+	currentTime.setAttribute("class", "narrativ-current narrativ-currentTime")
 
 	const timeline = document.createElement("div");
-	timeline.setAttribute("class", "timeline")
+	timeline.setAttribute("class", "narrativ-timeline")
 
 	// const progress = document.createElement("div");
 	// progress.setAttribute("class", "progress")
 
 	const progress = document.createElement("input");
-	progress.setAttribute("class", "seek_slider")
+	progress.setAttribute("class", "narrativ-seek_slider")
 	progress.setAttribute("type", "range")
 	progress.setAttribute("min", "1")
 	progress.setAttribute("max", "100")
@@ -145,18 +145,18 @@ function create_player() {
 	progress.setAttribute("step", "0.001")
 
 	timeline.appendChild(progress);
-	audio_player.append(audio, durationTime, timeline, currentTime)
+	audio_player.append(audio, currentTime, timeline, durationTime)
 	// **** finish audio player
 
 	// add volume slider
 	const volume_box = document.createElement("div");
-	volume_box.setAttribute("class", "volume_box")
+	volume_box.setAttribute("class", "narrativ-volume_box")
 
 	const volume = document.createElement("div");
-	volume.setAttribute("class", "volume")
+	volume.setAttribute("class", "narrativ-volume")
 
 	const volumeIcon = document.createElement("div");
-	volumeIcon.setAttribute("class", "volume_icon")
+	volumeIcon.setAttribute("class", "narrativ-volume_icon")
 
 	const volumeInput = document.createElement("input");
 	volumeInput.setAttribute("type", "range")
@@ -186,17 +186,17 @@ function create_player() {
 
 function play_music() {
 	// const audioPlayer = document.querySelector(".audio_player");
-	const current_title = document.querySelector('.current_title');
-	const musicBar_animation = document.querySelector('.musicBar_animation')
+	const current_title = document.querySelector('.narrativ-current_title');
+	const musicBar_animation = document.querySelector('.narrativ-musicBar_animation')
 	const audio = new Audio();
 
-	const playBtn = document.querySelector("#playToggle");
-	var return_back = document.getElementById("return_back");
-	var return_forward = document.getElementById("return_forward");
-	const speepPopUP = document.querySelector("#openSpeedPopUp");
-	const timeline = document.querySelector(".timeline");
+	const playBtn = document.querySelector("#narrativ-playToggle");
+	var return_back = document.getElementById("narrativ-return_back");
+	var return_forward = document.getElementById("narrativ-return_forward");
+	const speepPopUP = document.querySelector("#narrativ-openSpeedPopUp");
+	const timeline = document.querySelector(".narrativ-timeline");
 
-	const player_box = document.querySelector(".player_box");
+	const player_box = document.querySelector(".narrativ-player_box");
 
 	const music_list = [{
 			img: '../img/img.png',
@@ -211,7 +211,7 @@ function play_music() {
 
 	];
 
-	let seek_slider = document.querySelector('.seek_slider');
+	let seek_slider = document.querySelector('.narrativ-seek_slider');
 	let track_index = 0;
 	let updateTimer;
 
@@ -248,7 +248,7 @@ function play_music() {
 			const max = seek_slider.max;
 			const val = seek_slider.value;
 
-			
+
 			seek_slider.style.backgroundSize = ((val - min) * 100) / (max - min) + "% 100%";
 
 
@@ -269,10 +269,10 @@ function play_music() {
 			if (durationMinutes < 10) {
 				durationMinutes = "0" + durationMinutes;
 			}
-			// currentTime.textContent = "-" + getTimeCodeFromNum(audio.duration - audio.currentTime);
-			// document.querySelector("#durationTime").textContent = getTimeCodeFromNum(audio.duration);
-			currentTime.textContent = currentMinutes + ":" + currentSeconds;
-			durationTime.textContent = durationMinutes + ":" + durationSeconds;
+			durationTime.textContent = "-" + getTimeCodeFromNum(audio.duration - audio.currentTime);
+			currentTime.textContent = getTimeCodeFromNum(audio.currentTime);
+			// currentTime.textContent = currentMinutes + ":" + currentSeconds;
+			// durationTime.textContent = durationMinutes + ":" + durationSeconds;
 		}
 	}
 
@@ -290,13 +290,13 @@ function play_music() {
 		loadTrack(track_index);
 		playTrack();
 		if (track_index == 1) {
-			playBtn.disabled = false;
+			// playBtn.disabled = false;
 			return_back.disabled = false;
 			return_forward.disabled = false;
 			speepPopUP.disabled = false;
 			player_box.classList.remove('inActive')
 		} else {
-			playBtn.disabled = true;
+			// playBtn.disabled = true;
 			return_back.disabled = true;
 			return_forward.disabled = true;
 			speepPopUP.disabled = true;
@@ -304,7 +304,7 @@ function play_music() {
 		}
 	}
 	audio.addEventListener('ended', nextSong);
-	let s = document.querySelector('.seek_slider')
+	let s = document.querySelector('.narrativ-seek_slider')
 	s.addEventListener("input", seekTo);
 
 	function seekTo() {
@@ -325,25 +325,25 @@ function play_music() {
 		"click",
 		() => {
 			if (audio.paused) {
-				playBtn.classList.remove("play");
-				playBtn.classList.add("pause");
-				musicBar_animation.classList.add('play')
+				playBtn.classList.remove("narrativ-play");
+				playBtn.classList.add("narrativ-pause");
+				musicBar_animation.classList.add('narrativ-play')
 				audio.play();
 			} else {
-				playBtn.classList.remove("pause");
-				playBtn.classList.add("play");
-				musicBar_animation.classList.remove('play')
+				playBtn.classList.remove("narrativ-pause");
+				playBtn.classList.add("narrativ-play");
+				musicBar_animation.classList.remove('narrativ-play')
 				audio.pause();
 			}
 			if (track_index == 1) {
 				console.log('n')
-				playBtn.disabled = false;
+				// playBtn.disabled = false;
 				return_back.disabled = false;
 				return_forward.disabled = false;
 				speepPopUP.disabled = false;
 				player_box.classList.remove('inActive')
 			} else {
-				playBtn.disabled = true;
+				// playBtn.disabled = true;
 				return_back.disabled = true;
 				return_forward.disabled = true;
 				speepPopUP.disabled = true;
@@ -383,8 +383,8 @@ function play_music() {
 
 
 	//* sound volume control
-	const volume_icon = document.querySelector(".volume_icon");
-	const volume = document.querySelector(".volume input");
+	const volume_icon = document.querySelector(".narrativ-volume_icon");
+	const volume = document.querySelector(".narrativ-volume input");
 
 
 	volume_icon.addEventListener("click", volume_iconClick, false);
@@ -420,7 +420,7 @@ function play_music() {
 		}
 	});
 
-	const rangeInputs = document.querySelector('.volume input[type="range"]');
+	const rangeInputs = document.querySelector('.narrativ-volume input[type="range"]');
 
 
 	function handleInputChange(e) {
@@ -441,11 +441,11 @@ function play_music() {
 	speepPopUP.addEventListener("click", speepPopUPClick, false);
 
 	function speepPopUPClick() {
-		this.parentNode.querySelector(".speedPop_Up").classList.toggle('show')
+		this.parentNode.querySelector(".narrativ-speedPop_Up").classList.toggle('show')
 	}
 
 
-	var speedValue = document.querySelectorAll('.speedValueItem');
+	var speedValue = document.querySelectorAll('.narrativ-speedValueItem');
 	[].forEach.call(speedValue, function (el) {
 		el.onclick = function (e) {
 			for (var i = 0; i < speedValue.length; i++) {
@@ -455,13 +455,13 @@ function play_music() {
 			el.classList.toggle('active');
 			speepPopUP.textContent = el.innerHTML;
 			audio.playbackRate = parseFloat(el.innerHTML);
-			document.querySelector(".speedPop_Up").classList.toggle('show')
+			document.querySelector(".narrativ-speedPop_Up").classList.toggle('show')
 		}
 	});
 
 
-	const accordion = document.querySelector(".arrow");
-	const player_section = document.querySelector(".player_section");
+	const accordion = document.querySelector(".narrativ-arrow");
+	const player_section = document.querySelector(".narrativ-player_section");
 
 	accordion.addEventListener("click", accordionClick, false);
 
@@ -477,7 +477,7 @@ function stikyPlayer() {
 		myFunction()
 	};
 
-	var player = document.getElementById("player_here");
+	var player = document.getElementById("narrativ-player_here");
 	var sticky = player.offsetTop + player.clientHeight + 70;
 
 	function myFunction() {
