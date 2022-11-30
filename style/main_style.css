@@ -441,7 +441,7 @@ header .nav span {
   z-index: 10;
 }
 
-.narrativ-controler_box {
+.narrativ-controller_box {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -449,7 +449,7 @@ header .nav span {
   position: relative;
   margin: 0 0 20px;
 }
-.narrativ-controler_box .narrativ-play_btn {
+.narrativ-controller_box .narrativ-play_btn {
   width: 51px;
   height: 51px;
   background-color: #4169E1;
@@ -464,15 +464,15 @@ header .nav span {
   background-size: 20px;
   transition: background-color 0.2s;
 }
-.narrativ-controler_box .narrativ-play_btn.narrativ-pause {
+.narrativ-controller_box .narrativ-play_btn.narrativ-pause {
   background-image: url("../img/pause.svg");
   background-size: 16px;
   background-position: center;
 }
-.narrativ-controler_box .narrativ-play_btn:hover, .narrativ-controler_box .narrativ-play_btn:disabled {
+.narrativ-controller_box .narrativ-play_btn:hover, .narrativ-controller_box .narrativ-play_btn:disabled {
   background-color: #5B88FF;
 }
-.narrativ-controler_box .narrativ-return {
+.narrativ-controller_box .narrativ-return {
   width: 30px;
   height: 35px;
   background-color: transparent;
@@ -489,11 +489,11 @@ header .nav span {
   align-items: center;
   transition: color 0.2s;
 }
-.narrativ-controler_box .narrativ-return:hover, .narrativ-controler_box .narrativ-return:disabled {
+.narrativ-controller_box .narrativ-return:hover, .narrativ-controller_box .narrativ-return:disabled {
   background-image: url("../img/return-hover.svg");
   background-size: 100%;
 }
-.narrativ-controler_box .narrativ-return::after {
+.narrativ-controller_box .narrativ-return::after {
   content: "15";
   position: absolute;
   color: #414141;
@@ -503,13 +503,13 @@ header .nav span {
   font-family: "RobotoRegular", sans-serif;
   transition: all 0.2s;
 }
-.narrativ-controler_box .narrativ-return:hover::after, .narrativ-controler_box .narrativ-return:disabled::after {
+.narrativ-controller_box .narrativ-return:hover::after, .narrativ-controller_box .narrativ-return:disabled::after {
   color: #606060;
 }
-.narrativ-controler_box .narrativ-return.narrativ-return_forward {
+.narrativ-controller_box .narrativ-return.narrativ-return_forward {
   transform: scaleX(-1);
 }
-.narrativ-controler_box .narrativ-return.narrativ-return_forward::after {
+.narrativ-controller_box .narrativ-return.narrativ-return_forward::after {
   transform: scaleX(-1);
   padding: 6px 2px 0 0;
 }
@@ -601,7 +601,7 @@ header .nav span {
   cursor: default;
 }
 .narrativ-audio_player .narrativ-timeline {
-  background: #90AEFF;
+  background: rgba(144, 174, 255, 0.5);
   width: 446px;
   height: 4px;
   position: relative;
@@ -612,7 +612,6 @@ header .nav span {
 }
 .narrativ-audio_player .narrativ-timeline .narrativ-seek_slider {
   -webkit-appearance: none;
-  width: 100%;
   height: 100%;
   background: #90AEFF;
   border-radius: 16px;
@@ -621,6 +620,10 @@ header .nav span {
   background-repeat: no-repeat;
   display: inline-block;
   vertical-align: middle;
+}
+.narrativ-audio_player .narrativ-timeline .narrativ-seek_slider#narrativ-buffered-amount {
+  background-color: #90AEFF;
+  width: 0;
 }
 .narrativ-audio_player .narrativ-timeline:hover .narrativ-seek_slider {
   background-image: linear-gradient(#5B88FF, #5B88FF);
@@ -674,13 +677,13 @@ header .nav span {
 #narrativ-player_here.sticky .narrativ-player_section.resize .narrativ-player_box.inActive::after {
   display: none;
 }
-#narrativ-player_here.sticky .narrativ-player_section.resize .narrativ-controler_box {
+#narrativ-player_here.sticky .narrativ-player_section.resize .narrativ-controller_box {
   margin: 0;
 }
-#narrativ-player_here.sticky .narrativ-player_section.resize .narrativ-controler_box .narrativ-return {
+#narrativ-player_here.sticky .narrativ-player_section.resize .narrativ-controller_box .narrativ-return {
   background-image: url("../img/return-white.svg");
 }
-#narrativ-player_here.sticky .narrativ-player_section.resize .narrativ-controler_box .narrativ-return::after {
+#narrativ-player_here.sticky .narrativ-player_section.resize .narrativ-controller_box .narrativ-return::after {
   color: #FDFDFD;
 }
 #narrativ-player_here.sticky .narrativ-player_section.resize .narrativ-current_title {
@@ -948,7 +951,7 @@ input[type=range]::-ms-track {
     bottom: 55%;
     height: 40%;
   }
-  .narrativ-controler_box {
+  .narrativ-controller_box {
     margin: 0;
   }
   .narrativ-audio_player {
@@ -1045,7 +1048,7 @@ input[type=range]::-ms-track {
             animation-fill-mode: forwards;
     transition: all 0.3s;
   }
-  #narrativ-player_here.sticky .narrativ-player_section.resize .narrativ-player_box .narrativ-controler_box {
+  #narrativ-player_here.sticky .narrativ-player_section.resize .narrativ-player_box .narrativ-controller_box {
     justify-content: flex-end;
   }
   @-webkit-keyframes bg {
