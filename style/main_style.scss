@@ -457,7 +457,7 @@ header {
             color: $--narrativ-color-text-hover;
         }
 
-        &.active {
+        &.narrativ-active {
             color: $body-text-color;
         }
     }
@@ -476,7 +476,7 @@ header {
         left: -130px;
         z-index: 10;
 
-        &.show {
+        &.narrativ-show {
             visibility: visible;
         }
     }
@@ -485,7 +485,7 @@ header {
 
 // when post roll play
 .narrativ-player_box {
-    &.inActive {
+    &.narrativ-inActive {
         position: relative;
 
         &::after {
@@ -605,7 +605,7 @@ header {
         background-repeat: no-repeat;
         background-size: 20px;
 
-        &.mute {
+        &.narrativ-mute {
             background-image: url("../img/mute.svg");
 
             &:hover {
@@ -635,7 +635,7 @@ header {
         background-size: 70% 100%;
         background-repeat: no-repeat;
 
-        &.mute {
+        &.narrativ-mute {
             background-size: 0% 100% !important;
 
             &::-webkit-slider-thumb {
@@ -733,7 +733,7 @@ header {
 
 // style for player when scroll and fixed it
 #narrativ-player_here {
-    &.sticky {
+    &.narrativ-sticky {
         height: 127px;
 
 
@@ -746,7 +746,7 @@ header {
             justify-content: center;
             height: 127px;
 
-            &.resize {
+            &.narrativ-resize {
                 height: 76px;
                 background-color: $--narrativ-background-color-resize;
                 box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.12);
@@ -781,7 +781,7 @@ header {
 
                 .narrativ-player_box {
                     width: 522px;
-                    &.inActive::after
+                    &.narrativ-inActive::after
                     {
                         display: none;
                     }
@@ -817,7 +817,7 @@ header {
                         background-image: url('../img/volume-white.svg');
                         transition: all .3s;
 
-                        &.mute {
+                        &.narrativ-mute {
                             background-image: url('../img/mute-white.svg');
                         }
                     }
@@ -1007,9 +1007,9 @@ input[type="range"]::-ms-track {
     }
 
     #narrativ-player_here {
-        &.sticky {
+        &.narrativ-sticky {
             .narrativ-player_section {
-                &.resize {
+                &.narrativ-resize {
                     .narrativ-player_box {
                         width: 376px;
                     }
@@ -1149,7 +1149,7 @@ input[type="range"]::-ms-track {
         justify-content: flex-start;
         align-items: flex-start;
 
-        &.inActive::after
+        &.narrativ-inActive::after
         {
             bottom: 55%;
             height: 40%;
@@ -1194,7 +1194,7 @@ input[type="range"]::-ms-track {
     }
 
     #narrativ-player_here {
-        &.sticky {
+        &.narrativ-sticky {
             height: 226px;
             
             .narrativ-player_section {
@@ -1209,7 +1209,7 @@ input[type="range"]::-ms-track {
                     right: 5px;
                     background-color: transparent;
 
-                    &.colapse {
+                    &.narrativ-colapse {
                         top: 0;
                         right: 0;
                         width: 100%;
@@ -1225,7 +1225,7 @@ input[type="range"]::-ms-track {
                     }
                 }
 
-                &.resize {
+                &.narrativ-resize {
                     height: 64px;
 
                     .narrativ-arrow {
@@ -1350,9 +1350,9 @@ input[type="range"]::-ms-track {
     }
 
     #narrativ-player_here {
-        &.sticky {
+        &.narrativ-sticky {
             .narrativ-player_section {
-                &.resize {
+                &.narrativ-resize {
                     .narrativ-info_box {
                         .narrativ-current_title {
                             max-width: 84%;
