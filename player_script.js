@@ -15,7 +15,7 @@ const article_data = {
 	"insert_after_element": {
 		"id": "article_title_box"
 	},
-	"audio_player_delay": "1000",
+	"audio_player_delay": "5000",
 	"article_title": "Narrativ Olena Test Article",
 	"article_audio_src": "https://narrativ-audio-bucket.s3.amazonaws.com/f4f661b7-4c49-4d24-becc-197336ac94f0/8e3eebfd-2a0b-4fc4-a016-4aaa0957c1d0-nina.mp3",
 	"pre_roll": "https://od-spy.live.streamtheworld.com/assets/30-seconds-spot-128kbs.mp3?stid=797753&requestId=98506526-f895-409f-a000-a2ac7ec3a20d&cb=1669864345680"
@@ -206,7 +206,7 @@ function insert_narrativ_player() {
 	progress.setAttribute("max", "100")
 	progress.setAttribute("value", "0")
 	progress.setAttribute("step", "0.001")
-	// progress.style.background = article_data['css']['narrativColorFill']
+	
 	progress.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgress'] + ',' + article_data['css']['narrativColorProgress'] + ')'
 
 	progress.addEventListener("mouseover", mOverProgress, false);
@@ -266,7 +266,8 @@ function insert_narrativ_player() {
 	player_container.append(player_section)
 
 	// insert player section
-	const article_title_box = document.getElementById('article_title_box')
+	// const article_title_box = document.getElementById('article_title_box')
+	const article_title_box = document.getElementById(article_data['insert_after_element']['id']) 
 
 	function insertAfter(newNode, existingNode) {
 		existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
