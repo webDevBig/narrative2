@@ -313,9 +313,6 @@ header .nav span {
   line-height: 23px;
   cursor: default;
 }
-.narrativ-player_section .narrativ-title_box .narrativ-current_title:hover {
-  color: #5B88FF;
-}
 .narrativ-player_section .narrativ-volume_box {
   display: flex;
   flex-direction: column;
@@ -396,18 +393,17 @@ header .nav span {
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  color: #414141;
   cursor: pointer;
   margin: 0 5px;
   border: none;
   outline: none;
   background-color: transparent;
 }
-.narrativ-speed .narrativ-speedValue:hover, .narrativ-speed .narrativ-speedValue:disabled {
+.narrativ-speed .narrativ-speedValue:disabled {
   color: #606060;
 }
 .narrativ-speed .narrativ-speedValue.narrativ-active {
-  color: #2E2E2E;
+  color: #2E2E2E !important;
 }
 .narrativ-speed .narrativ-speedPop_Up {
   background: #F5F5F5;
@@ -496,7 +492,6 @@ header .nav span {
 .narrativ-controller_box .narrativ-return::after {
   content: "15";
   position: absolute;
-  color: #414141;
   font-size: 10px;
   font-weight: 400;
   padding: 6px 0 0;
@@ -550,7 +545,6 @@ header .nav span {
   height: 4px;
   background: #90AEFF;
   border-radius: 16px;
-  background-image: linear-gradient(#4169E1, #4169E1);
   background-size: 70% 100%;
   background-repeat: no-repeat;
 }
@@ -568,9 +562,6 @@ header .nav span {
 .narrativ-volume input[type=range].narrativ-mute::-ms-thumb {
   position: absolute;
   top: -6px;
-}
-.narrativ-volume input[type=range]:hover {
-  background-image: linear-gradient(#5B88FF, #5B88FF);
 }
 .narrativ-volume input[type=range]:hover::-webkit-slider-thumb {
   background: #5B88FF;
@@ -591,11 +582,9 @@ header .nav span {
 .narrativ-audio_player .narrativ-currentTime,
 .narrativ-audio_player .narrativ-durationTime {
   font-weight: 500;
-  font-size: 12px;
   line-height: 14px;
   display: flex;
   align-items: center;
-  color: #414141;
   font-family: "RobotoRegular";
   min-width: 30px;
   cursor: default;
@@ -627,6 +616,9 @@ header .nav span {
 }
 .narrativ-audio_player .narrativ-timeline:hover .narrativ-seek_slider {
   background-image: linear-gradient(#5B88FF, #5B88FF);
+}
+.narrativ-audio_player .narrativ-timeline:hover input[type=range]::-webkit-slider-thumb {
+  background: #5B88FF;
 }
 
 #narrativ-player_here.narrativ-sticky {
@@ -759,6 +751,9 @@ header .nav span {
   transition: all 0.3s;
   width: 100%;
   height: 100%;
+}
+#narrativ-player_here.narrativ-sticky .narrativ-player_section .narrativ-arrow.narrativ-colapse::after {
+  transform: rotate(180deg);
 }
 #narrativ-player_here.narrativ-sticky .narrativ-player_section .narrativ-player_box {
   margin: 0 85px 0 81px;

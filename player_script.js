@@ -1,10 +1,35 @@
-function TODO_FUNCTION() {
+const article_data = {
+	"has_narrativ_audio": true,
+	"css": {
+		"narrativBackgroundColor": "#F5F5F5",
+		"narrativBackgroundColorResize": "#4169E1",
+		"narrativColorProgress": "#4169E1",
+		"narrativColorProgressHover": "#5B88FF",
+		"narrativColorFill": "#90AEFF",
+		"narrativColorText": "#414141",
+		"narrativColorTextHover": "#606060",
+		"narrativColorResize": "#FDFDFD",
+		"narrativColorFillResize": "#E4ECFF",
+		"narrativFontSize": "12px"
+	},
+	"insert_after_element": {
+		"id": "article_title_box"
+	},
+	"audio_player_delay": "1000",
+	"article_title": "Narrativ Olena Test Article",
+	"article_audio_src": "https://narrativ-audio-bucket.s3.amazonaws.com/f4f661b7-4c49-4d24-becc-197336ac94f0/8e3eebfd-2a0b-4fc4-a016-4aaa0957c1d0-nina.mp3",
+	"pre_roll": "https://od-spy.live.streamtheworld.com/assets/30-seconds-spot-128kbs.mp3?stid=797753&requestId=98506526-f895-409f-a000-a2ac7ec3a20d&cb=1669864345680"
+}
+
+function insert_narrativ_player() {
 
 	const player_container = document.createElement("div");
 	player_container.setAttribute('id', "narrativ-player_here")
 
 	const player_section = document.createElement("div");
-	player_section.setAttribute('class', 'narrativ-player_section')
+	player_section.setAttribute('class', 'narrativ-player_section bg_light')
+
+	player_section.style.backgroundColor = article_data['css']['narrativBackgroundColor'];
 
 	// add arrow
 	const arrow = document.createElement("div");
@@ -33,6 +58,17 @@ function TODO_FUNCTION() {
 	// add track name
 	const current_title = document.createElement("p");
 	current_title.setAttribute('class', 'narrativ-current_title');
+
+	current_title.addEventListener("mouseover", mOverCurrent_title, false);
+	current_title.addEventListener("mouseout", mOutCurrent_title, false);
+
+	function mOverCurrent_title() {
+		current_title.style.color = '#5B88FF'
+	}
+
+	function mOutCurrent_title() {
+		current_title.style.color = article_data['css']['narrativColorText']
+	}
 
 	// add title under volume
 	const volume_text = document.createElement("p");
@@ -70,10 +106,22 @@ function TODO_FUNCTION() {
 	const speed = document.createElement("div");
 	speed.setAttribute("class", "narrativ-speed")
 
+
 	const speedValue = document.createElement("button");
 	speedValue.setAttribute("class", "narrativ-speedValue")
 	speedValue.setAttribute("id", "narrativ-openSpeedPopUp")
 	speedValue.textContent = '1x';
+
+	speedValue.addEventListener("mouseover", mOverSpeedValue, false);
+	speedValue.addEventListener("mouseout", mOutSpeedValue, false);
+
+	function mOverSpeedValue() {
+		speedValue.style.color = article_data['css']['narrativColorTextHover']
+	}
+
+	function mOutSpeedValue() {
+		speedValue.style.color = article_data['css']['narrativColorText']
+	}
 
 
 
@@ -87,7 +135,20 @@ function TODO_FUNCTION() {
 		speedValueItem.setAttribute("class", "narrativ-speedValueItem narrativ-speedValue")
 		speedValueItem.textContent = directory[i];
 		speedPop_Up.append(speedValueItem)
+
+		speedValueItem.addEventListener("mouseover", mOverSpeedValueItem, false);
+		speedValueItem.addEventListener("mouseout", mOutSpeedValueItem, false);
+
+		function mOverSpeedValueItem() {
+			speedValueItem.style.color = article_data['css']['narrativColorTextHover']
+		}
+
+		function mOutSpeedValueItem() {
+			speedValueItem.style.color = article_data['css']['narrativColorText']
+		}
 	}
+
+
 
 	speed.append(speedValue, speedPop_Up)
 
@@ -97,6 +158,7 @@ function TODO_FUNCTION() {
 	const return_back = document.createElement("button");
 	return_back.setAttribute("class", "narrativ-return narrativ-return_back");
 	return_back.setAttribute("id", "narrativ-return_back")
+	return_back.style.color = article_data['css']['narrativColorText']
 
 	// play
 	const play_btn = document.createElement("button");
@@ -107,6 +169,7 @@ function TODO_FUNCTION() {
 	const return_forward = document.createElement("button");
 	return_forward.setAttribute("class", "narrativ-return narrativ-return_forward");
 	return_forward.setAttribute("id", "narrativ-return_forward")
+	return_forward.style.color = article_data['css']['narrativColorText']
 
 	controller_box.append(speed, return_back, play_btn, return_forward)
 
@@ -121,11 +184,15 @@ function TODO_FUNCTION() {
 	const durationTime = document.createElement("span");
 	durationTime.setAttribute("id", "narrativ-durationTime")
 	durationTime.setAttribute("class", "narrativ-current narrativ-durationTime")
+	durationTime.style.fontSize = article_data['css']['narrativFontSize']
+	durationTime.style.color = article_data['css']['narrativColorText']
 
 	// add current time for track
 	const currentTime = document.createElement("span");
 	currentTime.setAttribute("id", "narrativ-currentTime")
 	currentTime.setAttribute("class", "narrativ-current narrativ-currentTime")
+	currentTime.style.fontSize = article_data['css']['narrativFontSize']
+	currentTime.style.color = article_data['css']['narrativColorText']
 
 	const timeline = document.createElement("div");
 	timeline.setAttribute("class", "narrativ-timeline narrativ-buffered")
@@ -139,6 +206,20 @@ function TODO_FUNCTION() {
 	progress.setAttribute("max", "100")
 	progress.setAttribute("value", "0")
 	progress.setAttribute("step", "0.001")
+	// progress.style.background = article_data['css']['narrativColorFill']
+	progress.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgress'] + ',' + article_data['css']['narrativColorProgress'] + ')'
+
+	progress.addEventListener("mouseover", mOverProgress, false);
+	progress.addEventListener("mouseout", mOutProgress, false);
+
+	function mOverProgress() {
+		progress.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgressHover'] + ',' + article_data['css']['narrativColorProgressHover'] + ')'
+
+	}
+
+	function mOutProgress() {
+		progress.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgress'] + ',' + article_data['css']['narrativColorProgress'] + ')'
+	}
 
 	timeline.appendChild(progress);
 	audio_player.append(currentTime, timeline, durationTime)
@@ -160,6 +241,20 @@ function TODO_FUNCTION() {
 	volumeInput.setAttribute("min", "0")
 	volumeInput.setAttribute("max", "100")
 	volumeInput.setAttribute("step", "1")
+
+	volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgress'] + ',' + article_data['css']['narrativColorProgress'] + ')'
+
+	volumeInput.addEventListener("mouseover", mOverVolumeInput, false);
+	volumeInput.addEventListener("mouseout", mOutVolumeInput, false);
+
+	function mOverVolumeInput() {
+		volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgressHover'] + ',' + article_data['css']['narrativColorProgressHover'] + ')'
+
+	}
+
+	function mOutVolumeInput() {
+		volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgress'] + ',' + article_data['css']['narrativColorProgress'] + ')'
+	}
 
 	volume.append(volumeIcon, volumeInput)
 	volume_box.append(volume, volume_text)
@@ -195,13 +290,18 @@ function TODO_FUNCTION() {
 
 	const music_list = [{
 			img: '../img/img.png',
-			name: 'TOP 10 BINGE-WORTHY SERIES 0',
-			music: 'https://www2.cs.uic.edu/~i101/SoundFiles/gettysburg10.wav'
+			// name: 'TOP 10 BINGE-WORTHY SERIES 0',
+			// music: 'https://www2.cs.uic.edu/~i101/SoundFiles/gettysburg10.wav'
+			name: article_data['article_title'],
+			music: article_data["pre_roll"]
+
 		},
 		{
 			img: '../img/img.png',
-			name: 'TOP 10 BINGE-WORTHY SERIES 1',
-			music: 'https://narrativ-audio-bucket.s3.amazonaws.com/930157e4-995a-42de-af4b-8c30ab58f42d/fcf6c846-a10b-473b-9745-f475137aab25-nina.mp3'
+			name: article_data['article_title'],
+			music: article_data["article_audio_src"]
+			// name: 'TOP 10 BINGE-WORTHY SERIES 1',
+			// music: 'https://narrativ-audio-bucket.s3.amazonaws.com/930157e4-995a-42de-af4b-8c30ab58f42d/fcf6c846-a10b-473b-9745-f475137aab25-nina.mp3'
 		},
 
 	];
@@ -451,6 +551,45 @@ function TODO_FUNCTION() {
 	function accordionClick() {
 		player_section.classList.toggle('narrativ-resize')
 		this.classList.toggle('narrativ-colapse')
+
+		if (!player_section.classList.contains('bg_light')) {
+			console.log('no')
+			player_section.classList.add('bg_light')
+			player_section.style.backgroundColor = article_data['css']['narrativBackgroundColor'];
+			volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgress'] + ',' + article_data['css']['narrativColorProgress'] + ')'
+			volumeInput.addEventListener("mouseover", mOverVolumeInput, false);
+			volumeInput.addEventListener("mouseout", mOutVolumeInput, false);
+
+			function mOverVolumeInput() {
+				volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgressHover'] + ',' + article_data['css']['narrativColorProgressHover'] + ')'
+
+			}
+
+			function mOutVolumeInput() {
+				volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgress'] + ',' + article_data['css']['narrativColorProgress'] + ')'
+			}
+
+		} else {
+			console.log('y')
+			player_section.classList.remove('bg_light')
+			player_section.style.backgroundColor = article_data['css']['narrativBackgroundColorResize'];
+			volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorResize'] + ',' + article_data['css']['narrativColorResize'] + ')'
+			volumeInput.addEventListener("mouseover", mOverVolumeInput, false);
+			volumeInput.addEventListener("mouseout", mOutVolumeInput, false);
+
+			function mOverVolumeInput() {
+				volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorResize'] + ',' + article_data['css']['narrativColorResize'] + ')'
+
+			}
+
+			function mOutVolumeInput() {
+				volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorResize'] + ',' + article_data['css']['narrativColorResize'] + ')'
+			}
+		}
+
+
+
+
 	}
 
 	var player = document.getElementById("narrativ-player_here");
@@ -472,52 +611,6 @@ function TODO_FUNCTION() {
 
 async function initialize_narrativ() {
 
-	// you can replace this with the examples from below to change behavior/appearance
-	// let article_data = {
-	// 	"has_narrativ_audio": true,
-	// 	"css": {
-	// 		"narrativBackgroundColor": "#F5F5F5",
-	// 		"narrativBackgroundColorResize": "#4169E1",
-	// 		"narrativColorProgress": "#4169E1",
-	// 		"narrativColorProgressHover": "#5B88FF",
-	// 		"narrativColorFill": "#90AEFF",
-	// 		"narrativColorText": "#414141",
-	// 		"narrativColorTextHover": "#606060",
-	// 		"narrativColorResize": "#FDFDFD",
-	// 		"narrativColorFillResize": "#E4ECFF",
-	// 		"narrativFontSize": "12px"
-	// 	},
-	// 	"insert_after_element": {
-	// 		"class": "storydeck"
-	// 	},
-	// 	"audio_player_delay": "1000",
-	// 	"article_title": "Narrativ Olena Test Article",
-	// 	"article_audio_src": "https://narrativ-audio-bucket.s3.amazonaws.com/f4f661b7-4c49-4d24-becc-197336ac94f0/8e3eebfd-2a0b-4fc4-a016-4aaa0957c1d0-nina.mp3",
-	// 	"pre_roll": "https://od-spy.live.streamtheworld.com/assets/30-seconds-spot-128kbs.mp3?stid=797753&requestId=98506526-f895-409f-a000-a2ac7ec3a20d&cb=1669864345680"
-	// }
-	let article_data = {
-		"has_narrativ_audio": true,
-		"css": {
-			"narrativBackgroundColor": "#77F211",
-			"narrativBackgroundColorResize": "#57A912",
-			"narrativColorProgress": "#C0EE89",
-			"narrativColorProgressHover": "#5B88FF",
-			"narrativColorFill": "#90AEFF",
-			"narrativColorText": "#414141",
-			"narrativColorTextHover": "#606060",
-			"narrativColorResize": "#FDFDFD",
-			"narrativColorFillResize": "#E4ECFF",
-			"narrativFontSize": "12px"
-		},
-		"insert_after_element": {
-			"id": "article_title_box"
-		},
-		"audio_player_delay": "5000",
-		"article_title": "Narrativ Olena Test Article",
-		"article_audio_src": "https://narrativ-audio-bucket.s3.amazonaws.com/f4f661b7-4c49-4d24-becc-197336ac94f0/8e3eebfd-2a0b-4fc4-a016-4aaa0957c1d0-nina.mp3",
-		"pre_roll": "https://od-spy.live.streamtheworld.com/assets/30-seconds-spot-128kbs.mp3?stid=797753&requestId=98506526-f895-409f-a000-a2ac7ec3a20d&cb=1669864345680"
-	}
-
 	if (!article_data['has_narrativ_audio']) {
 		// if the object above inidicates no narrativ audio, do nothing
 		return
@@ -529,65 +622,11 @@ async function initialize_narrativ() {
 		// TODO: Olena to wrap her code above into a function, 
 		// which initializes from the relevant information contained in article_data
 		// e.g., colors, where it is inserted, title, audio files, etc.
-		TODO_FUNCTION()
-		
+		insert_narrativ_player()
+
 	}, article_data['audio_player_delay']);
 
 }
 
 // this should be the only root level function called
 initialize_narrativ()
-
-/* examples of article_data */
-
-// ORIGINAL PLAYER YOU DESIGNED, LOADING INSTANTLY; 
-// INSERTED AFTER ID ARTICLE_TITLE_BOX (ORIGINAL PLACEMENT)
-
-// article_data = {
-// 	"has_narrativ_audio": true,
-// 	"css": {
-// 		"narrativBackgroundColor": "#F5F5F5",
-// 		"narrativBackgroundColorResize": "#4169E1",
-// 		"narrativColorProgress": "#4169E1",
-// 		"narrativColorProgressHover": "#5B88FF",
-// 		"narrativColorFill": "#90AEFF",
-// 		"narrativColorText": "#414141",
-// 		"narrativColorTextHover": "#606060",
-// 		"narrativColorResize": "#FDFDFD",
-// 		"narrativColorFillResize": "#E4ECFF",
-// 		"narrativFontSize": "12px"
-// 	},
-// 	"insert_after_element": {
-// 		"id": "article_title_box"
-// 	},
-// 	"audio_player_delay": "0",
-// 	"article_title": "Narrativ Olena Test Article",
-// 	"article_audio_src": "https://narrativ-audio-bucket.s3.amazonaws.com/f4f661b7-4c49-4d24-becc-197336ac94f0/8e3eebfd-2a0b-4fc4-a016-4aaa0957c1d0-nina.mp3",
-// 	"pre_roll": "https://od-spy.live.streamtheworld.com/assets/30-seconds-spot-128kbs.mp3?stid=797753&requestId=98506526-f895-409f-a000-a2ac7ec3a20d&cb=1669864345680"
-// }
-
-// A SILLY LOOKING PLAYER, WITH SOME ELEMENTS REPLACED WITH GREEN, 
-// LOADING AFTER FIVE SECONDS; 
-// NOW SHOULD BE INSERTED AFTER THE AUTHOR'S NAME
-// article_data = {
-// 	"has_narrativ_audio": true,
-// 	"css": {
-// 		"narrativBackgroundColor": "#77F211",
-// 		"narrativBackgroundColorResize": "#57A912",
-// 		"narrativColorProgress": "#C0EE89",
-// 		"narrativColorProgressHover": "#5B88FF",
-// 		"narrativColorFill": "#90AEFF",
-// 		"narrativColorText": "#414141",
-// 		"narrativColorTextHover": "#606060",
-// 		"narrativColorResize": "#FDFDFD",
-// 		"narrativColorFillResize": "#E4ECFF",
-// 		"narrativFontSize": "12px"
-// 	},
-// 	"insert_after_element": {
-// 		"id": "article_title_box"
-// 	},
-// 	"audio_player_delay": "5000",
-// 	"article_title": "Narrativ Olena Test Article",
-// 	"article_audio_src": "https://narrativ-audio-bucket.s3.amazonaws.com/f4f661b7-4c49-4d24-becc-197336ac94f0/8e3eebfd-2a0b-4fc4-a016-4aaa0957c1d0-nina.mp3",
-// 	"pre_roll": "https://od-spy.live.streamtheworld.com/assets/30-seconds-spot-128kbs.mp3?stid=797753&requestId=98506526-f895-409f-a000-a2ac7ec3a20d&cb=1669864345680"
-// }
