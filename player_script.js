@@ -206,7 +206,7 @@ function insert_narrativ_player() {
 	progress.setAttribute("max", "100")
 	progress.setAttribute("value", "0")
 	progress.setAttribute("step", "0.001")
-	
+
 	progress.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgress'] + ',' + article_data['css']['narrativColorProgress'] + ')'
 
 	progress.addEventListener("mouseover", mOverProgress, false);
@@ -267,7 +267,7 @@ function insert_narrativ_player() {
 
 	// insert player section
 	// const article_title_box = document.getElementById('article_title_box')
-	const article_title_box = document.getElementById(article_data['insert_after_element']['id']) 
+	const article_title_box = document.getElementById(article_data['insert_after_element']['id'])
 
 	function insertAfter(newNode, existingNode) {
 		existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
@@ -281,328 +281,332 @@ function insert_narrativ_player() {
 	const speepPopUP = document.querySelector("#narrativ-openSpeedPopUp");
 
 	audio.addEventListener('progress', function () {
-		var bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
-		var duration = audio.duration;
-		if (duration > 0) {
-			document.getElementById('narrativ-buffered-amount').style.width = ((bufferedEnd / duration) * 100) + "%";
+			var bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
+			var duration = audio.duration;
+			var value = ((bufferedEnd / duration) * 100);
+			if (duration > 0) {
+				document.getElementById('narrativ-buffered-amount').style.width = ((bufferedEnd / duration) * 100) + "%";
+				if ( value < 100) {
+				document.getElementById('narrativ-buffered-amount').style.width = "100%";
+			}
 		}
 	});
 
 
-	const music_list = [{
-			img: '../img/img.png',
-			// name: 'TOP 10 BINGE-WORTHY SERIES 0',
-			// music: 'https://www2.cs.uic.edu/~i101/SoundFiles/gettysburg10.wav'
-			name: article_data['article_title'],
-			music: article_data["pre_roll"]
+const music_list = [{
+		img: '../img/img.png',
+		// name: 'TOP 10 BINGE-WORTHY SERIES 0',
+		// music: 'https://www2.cs.uic.edu/~i101/SoundFiles/gettysburg10.wav'
+		name: article_data['article_title'],
+		music: article_data["pre_roll"]
 
-		},
-		{
-			img: '../img/img.png',
-			name: article_data['article_title'],
-			music: article_data["article_audio_src"]
-			// name: 'TOP 10 BINGE-WORTHY SERIES 1',
-			// music: 'https://narrativ-audio-bucket.s3.amazonaws.com/930157e4-995a-42de-af4b-8c30ab58f42d/fcf6c846-a10b-473b-9745-f475137aab25-nina.mp3'
-		},
+	},
+	{
+		img: '../img/img.png',
+		name: article_data['article_title'],
+		music: article_data["article_audio_src"]
+		// name: 'TOP 10 BINGE-WORTHY SERIES 1',
+		// music: 'https://narrativ-audio-bucket.s3.amazonaws.com/930157e4-995a-42de-af4b-8c30ab58f42d/fcf6c846-a10b-473b-9745-f475137aab25-nina.mp3'
+	},
 
-	];
+];
 
-	let seek_slider = document.querySelector('.narrativ-seek_slider');
-	let track_index = 0;
-	let updateTimer;
+let seek_slider = document.querySelector('.narrativ-seek_slider');
+let track_index = 0;
+let updateTimer;
 
+loadTrack(track_index);
+
+function loadTrack(track_index) {
+	clearInterval(updateTimer);
+	reset();
+
+	audio.src = music_list[track_index].music;
+	// track_art.style.backgroundImage = "url(" + music_list[track_index].img + ")";
+	current_title.textContent = music_list[track_index].name;
+
+	audio.load();
+	console.log(audio.buffered)
+	updateTimer = setInterval(setUpdate, 0.1);
+}
+
+function reset() {
+	currentTime.textContent = "00:00";
+	durationTime.textContent = "00:00";
+	seek_slider.value = 0;
+	seek_slider.style.backgroundSize = "0% 100%";
+}
+
+function setUpdate() {
+
+	let seekPosition = 0;
+
+	if (!isNaN(audio.duration)) {
+		seekPosition = audio.currentTime * (100 / audio.duration);
+		seek_slider.value = seekPosition;
+
+		const min = seek_slider.min;
+		const max = seek_slider.max;
+		const val = seek_slider.value;
+
+
+		seek_slider.style.backgroundSize = ((val - min) * 100) / (max - min) + "% 100%";
+
+
+		let currentMinutes = Math.floor(audio.currentTime / 60);
+		let currentSeconds = Math.floor(audio.currentTime - currentMinutes * 60);
+		let durationMinutes = Math.floor(audio.duration / 60);
+		let durationSeconds = Math.floor(audio.duration - durationMinutes * 60);
+
+		if (currentSeconds < 10) {
+			currentSeconds = "0" + currentSeconds;
+		}
+		if (durationSeconds < 10) {
+			durationSeconds = "0" + durationSeconds;
+		}
+		if (currentMinutes < 10) {
+			currentMinutes = "0" + currentMinutes;
+		}
+		if (durationMinutes < 10) {
+			durationMinutes = "0" + durationMinutes;
+		}
+		durationTime.textContent = "-" + getTimeCodeFromNum(audio.duration - audio.currentTime);
+		currentTime.textContent = getTimeCodeFromNum(audio.currentTime);
+	}
+}
+
+function playTrack() {
+	audio.play();
+	isPlaying = true;
+
+}
+
+function nextSong() {
+	track_index++;
+	if (track_index > music_list.length - 1) {
+		track_index = 0;
+	}
 	loadTrack(track_index);
-
-	function loadTrack(track_index) {
-		clearInterval(updateTimer);
-		reset();
-
-		audio.src = music_list[track_index].music;
-		// track_art.style.backgroundImage = "url(" + music_list[track_index].img + ")";
-		current_title.textContent = music_list[track_index].name;
-
-		audio.load();
-		console.log(audio.buffered)
-		updateTimer = setInterval(setUpdate, 0.1);
+	playTrack();
+	if (track_index == 1) {
+		return_back.disabled = false;
+		return_forward.disabled = false;
+		speepPopUP.disabled = false;
+		player_box.classList.remove('narrativ-inActive')
+	} else {
+		return_back.disabled = true;
+		return_forward.disabled = true;
+		speepPopUP.disabled = true;
+		player_box.classList.add('narrativ-inActive')
 	}
+}
+audio.addEventListener('ended', nextSong);
+let s = document.querySelector('.narrativ-seek_slider')
+s.addEventListener("input", seekTo);
 
-	function reset() {
-		currentTime.textContent = "00:00";
-		durationTime.textContent = "00:00";
-		seek_slider.value = 0;
-		seek_slider.style.backgroundSize = "0% 100%";
-	}
+function seekTo() {
+	let seekto = audio.duration * (seek_slider.value / 100);
+	audio.currentTime = seekto;
 
-	function setUpdate() {
+	seek_slider.style.backgroundSize = audio.currentTime / audio.duration * 100 + "% 100%"
 
-		let seekPosition = 0;
-
-		if (!isNaN(audio.duration)) {
-			seekPosition = audio.currentTime * (100 / audio.duration);
-			seek_slider.value = seekPosition;
-
-			const min = seek_slider.min;
-			const max = seek_slider.max;
-			const val = seek_slider.value;
+}
 
 
-			seek_slider.style.backgroundSize = ((val - min) * 100) / (max - min) + "% 100%";
+//toggle between playing and pausing on button click
 
-
-			let currentMinutes = Math.floor(audio.currentTime / 60);
-			let currentSeconds = Math.floor(audio.currentTime - currentMinutes * 60);
-			let durationMinutes = Math.floor(audio.duration / 60);
-			let durationSeconds = Math.floor(audio.duration - durationMinutes * 60);
-
-			if (currentSeconds < 10) {
-				currentSeconds = "0" + currentSeconds;
-			}
-			if (durationSeconds < 10) {
-				durationSeconds = "0" + durationSeconds;
-			}
-			if (currentMinutes < 10) {
-				currentMinutes = "0" + currentMinutes;
-			}
-			if (durationMinutes < 10) {
-				durationMinutes = "0" + durationMinutes;
-			}
-			durationTime.textContent = "-" + getTimeCodeFromNum(audio.duration - audio.currentTime);
-			currentTime.textContent = getTimeCodeFromNum(audio.currentTime);
+playBtn.addEventListener(
+	"click",
+	() => {
+		if (audio.paused) {
+			playBtn.classList.remove("narrativ-play");
+			playBtn.classList.add("narrativ-pause");
+			musicBar_animation.classList.add('narrativ-play')
+			audio.play();
+		} else {
+			playBtn.classList.remove("narrativ-pause");
+			playBtn.classList.add("narrativ-play");
+			musicBar_animation.classList.remove('narrativ-play')
+			audio.pause();
 		}
-	}
-
-	function playTrack() {
-		audio.play();
-		isPlaying = true;
-
-	}
-
-	function nextSong() {
-		track_index++;
-		if (track_index > music_list.length - 1) {
-			track_index = 0;
-		}
-		loadTrack(track_index);
-		playTrack();
 		if (track_index == 1) {
 			return_back.disabled = false;
 			return_forward.disabled = false;
 			speepPopUP.disabled = false;
 			player_box.classList.remove('narrativ-inActive')
 		} else {
+
 			return_back.disabled = true;
 			return_forward.disabled = true;
 			speepPopUP.disabled = true;
 			player_box.classList.add('narrativ-inActive')
 		}
+	},
+	false
+);
+
+
+
+//turn 128 seconds into 2:08
+function getTimeCodeFromNum(num) {
+	let seconds = parseInt(num);
+	let minutes = parseInt(seconds / 60);
+	seconds -= minutes * 60;
+	const hours = parseInt(minutes / 60);
+	minutes -= hours * 60;
+
+	if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+	return `${String(hours).padStart(2, 0)}:${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+}
+
+return_forward.addEventListener("click", return_forwardClick, false);
+
+function return_forwardClick() {
+	audio.currentTime = audio.currentTime + 15;
+	seek_slider.style.backgroundSize = audio.currentTime / audio.duration * 100 + "% 100%";
+}
+
+return_back.addEventListener("click", return_backClick, false);
+
+function return_backClick() {
+	audio.currentTime = audio.currentTime - 15;
+	seek_slider.style.backgroundSize = audio.currentTime / audio.duration * 100 + "% 100%";
+}
+
+
+//* sound volume control
+const volume_icon = document.querySelector(".narrativ-volume_icon");
+const volumeChange = document.querySelector(".narrativ-volume input");
+
+
+volume_icon.addEventListener("click", volume_iconClick, false);
+
+let muteState = 'unmute';
+var currentVolume = 1;
+
+function volume_iconClick() {
+	if (muteState === 'unmute') {
+		currentVolume = volumeChange.value;
+		volumeChange.value = 0;
+		audio.muted = true;
+		muteState = 'mute';
+		volume_icon.classList.add("narrativ-mute")
+		volumeChange.classList.add('narrativ-mute')
+	} else {
+		volume_icon.classList.remove("narrativ-mute")
+		volumeChange.classList.remove('narrativ-mute')
+		volumeChange.value = currentVolume;
+		audio.muted = false;
+		muteState = 'unmute';
 	}
-	audio.addEventListener('ended', nextSong);
-	let s = document.querySelector('.narrativ-seek_slider')
-	s.addEventListener("input", seekTo);
-
-	function seekTo() {
-		let seekto = audio.duration * (seek_slider.value / 100);
-		audio.currentTime = seekto;
-
-		seek_slider.style.backgroundSize = audio.currentTime / audio.duration * 100 + "% 100%"
-
+}
+volumeChange.addEventListener("change", () => {
+	audio.volume = volumeChange.value / 100;
+	audio.muted = false
+	if (audio.volume == 0) {
+		volume_icon.classList.add("narrativ-mute")
+		volumeChange.classList.add('narrativ-mute')
+	} else {
+		volume_icon.classList.remove("narrativ-mute")
+		volumeChange.classList.remove('narrativ-mute')
 	}
+});
+
+const rangeInputs = document.querySelector('.narrativ-volume input[type="range"]');
 
 
-	//toggle between playing and pausing on button click
-
-	playBtn.addEventListener(
-		"click",
-		() => {
-			if (audio.paused) {
-				playBtn.classList.remove("narrativ-play");
-				playBtn.classList.add("narrativ-pause");
-				musicBar_animation.classList.add('narrativ-play')
-				audio.play();
-			} else {
-				playBtn.classList.remove("narrativ-pause");
-				playBtn.classList.add("narrativ-play");
-				musicBar_animation.classList.remove('narrativ-play')
-				audio.pause();
-			}
-			if (track_index == 1) {
-				return_back.disabled = false;
-				return_forward.disabled = false;
-				speepPopUP.disabled = false;
-				player_box.classList.remove('narrativ-inActive')
-			} else {
-
-				return_back.disabled = true;
-				return_forward.disabled = true;
-				speepPopUP.disabled = true;
-				player_box.classList.add('narrativ-inActive')
-			}
-		},
-		false
-	);
-
-
-
-	//turn 128 seconds into 2:08
-	function getTimeCodeFromNum(num) {
-		let seconds = parseInt(num);
-		let minutes = parseInt(seconds / 60);
-		seconds -= minutes * 60;
-		const hours = parseInt(minutes / 60);
-		minutes -= hours * 60;
-
-		if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
-		return `${String(hours).padStart(2, 0)}:${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+function handleInputChange(e) {
+	let target = e.target;
+	if (e.target.type !== "range") {
+		target = document.getElementById("range");
 	}
+	const min = target.min;
+	const max = target.max;
+	const val = target.value;
 
-	return_forward.addEventListener("click", return_forwardClick, false);
+	target.style.backgroundSize = ((val - min) * 100) / (max - min) + "% 100%";
+}
 
-	function return_forwardClick() {
-		audio.currentTime = audio.currentTime + 15;
-		seek_slider.style.backgroundSize = audio.currentTime / audio.duration * 100 + "% 100%";
-	}
+rangeInputs.addEventListener("input", handleInputChange);
+speepPopUP.addEventListener("click", speepPopUPClick, false);
 
-	return_back.addEventListener("click", return_backClick, false);
-
-	function return_backClick() {
-		audio.currentTime = audio.currentTime - 15;
-		seek_slider.style.backgroundSize = audio.currentTime / audio.duration * 100 + "% 100%";
-	}
-
-
-	//* sound volume control
-	const volume_icon = document.querySelector(".narrativ-volume_icon");
-	const volumeChange = document.querySelector(".narrativ-volume input");
+function speepPopUPClick() {
+	this.parentNode.querySelector(".narrativ-speedPop_Up").classList.toggle('narrativ-show')
+}
 
 
-	volume_icon.addEventListener("click", volume_iconClick, false);
+var speedValueOpen = document.querySelectorAll('.narrativ-speedValueItem');
+[].forEach.call(speedValueOpen, function (el) {
+	el.onclick = function (e) {
+		for (var i = 0; i < speedValueOpen.length; i++) {
+			speedValueOpen[i].classList.remove('narrativ-active');
 
-	let muteState = 'unmute';
-	var currentVolume = 1;
-
-	function volume_iconClick() {
-		if (muteState === 'unmute') {
-			currentVolume = volumeChange.value;
-			volumeChange.value = 0;
-			audio.muted = true;
-			muteState = 'mute';
-			volume_icon.classList.add("narrativ-mute")
-			volumeChange.classList.add('narrativ-mute')
-		} else {
-			volume_icon.classList.remove("narrativ-mute")
-			volumeChange.classList.remove('narrativ-mute')
-			volumeChange.value = currentVolume;
-			audio.muted = false;
-			muteState = 'unmute';
 		}
+		el.classList.toggle('narrativ-active');
+		speepPopUP.textContent = el.innerHTML;
+		audio.playbackRate = parseFloat(el.innerHTML);
+		document.querySelector(".narrativ-speedPop_Up").classList.toggle('narrativ-show')
 	}
-	volumeChange.addEventListener("change", () => {
-		audio.volume = volumeChange.value / 100;
-		audio.muted = false
-		if (audio.volume == 0) {
-			volume_icon.classList.add("narrativ-mute")
-			volumeChange.classList.add('narrativ-mute')
-		} else {
-			volume_icon.classList.remove("narrativ-mute")
-			volumeChange.classList.remove('narrativ-mute')
+});
+
+
+const accordion = document.querySelector(".narrativ-arrow");
+accordion.addEventListener("click", accordionClick, false);
+
+function accordionClick() {
+	player_section.classList.toggle('narrativ-resize')
+	this.classList.toggle('narrativ-colapse')
+
+	if (!player_section.classList.contains('bg_light')) {
+		console.log('no')
+		player_section.classList.add('bg_light')
+		player_section.style.backgroundColor = article_data['css']['narrativBackgroundColor'];
+		volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgress'] + ',' + article_data['css']['narrativColorProgress'] + ')'
+		volumeInput.addEventListener("mouseover", mOverVolumeInput, false);
+		volumeInput.addEventListener("mouseout", mOutVolumeInput, false);
+
+		function mOverVolumeInput() {
+			volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgressHover'] + ',' + article_data['css']['narrativColorProgressHover'] + ')'
+
 		}
-	});
 
-	const rangeInputs = document.querySelector('.narrativ-volume input[type="range"]');
-
-
-	function handleInputChange(e) {
-		let target = e.target;
-		if (e.target.type !== "range") {
-			target = document.getElementById("range");
-		}
-		const min = target.min;
-		const max = target.max;
-		const val = target.value;
-
-		target.style.backgroundSize = ((val - min) * 100) / (max - min) + "% 100%";
-	}
-
-	rangeInputs.addEventListener("input", handleInputChange);
-	speepPopUP.addEventListener("click", speepPopUPClick, false);
-
-	function speepPopUPClick() {
-		this.parentNode.querySelector(".narrativ-speedPop_Up").classList.toggle('narrativ-show')
-	}
-
-
-	var speedValueOpen = document.querySelectorAll('.narrativ-speedValueItem');
-	[].forEach.call(speedValueOpen, function (el) {
-		el.onclick = function (e) {
-			for (var i = 0; i < speedValueOpen.length; i++) {
-				speedValueOpen[i].classList.remove('narrativ-active');
-
-			}
-			el.classList.toggle('narrativ-active');
-			speepPopUP.textContent = el.innerHTML;
-			audio.playbackRate = parseFloat(el.innerHTML);
-			document.querySelector(".narrativ-speedPop_Up").classList.toggle('narrativ-show')
-		}
-	});
-
-
-	const accordion = document.querySelector(".narrativ-arrow");
-	accordion.addEventListener("click", accordionClick, false);
-
-	function accordionClick() {
-		player_section.classList.toggle('narrativ-resize')
-		this.classList.toggle('narrativ-colapse')
-
-		if (!player_section.classList.contains('bg_light')) {
-			console.log('no')
-			player_section.classList.add('bg_light')
-			player_section.style.backgroundColor = article_data['css']['narrativBackgroundColor'];
+		function mOutVolumeInput() {
 			volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgress'] + ',' + article_data['css']['narrativColorProgress'] + ')'
-			volumeInput.addEventListener("mouseover", mOverVolumeInput, false);
-			volumeInput.addEventListener("mouseout", mOutVolumeInput, false);
-
-			function mOverVolumeInput() {
-				volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgressHover'] + ',' + article_data['css']['narrativColorProgressHover'] + ')'
-
-			}
-
-			function mOutVolumeInput() {
-				volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgress'] + ',' + article_data['css']['narrativColorProgress'] + ')'
-			}
-
-		} else {
-			console.log('y')
-			player_section.classList.remove('bg_light')
-			player_section.style.backgroundColor = article_data['css']['narrativBackgroundColorResize'];
-			volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorResize'] + ',' + article_data['css']['narrativColorResize'] + ')'
-			volumeInput.addEventListener("mouseover", mOverVolumeInput, false);
-			volumeInput.addEventListener("mouseout", mOutVolumeInput, false);
-
-			function mOverVolumeInput() {
-				volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorResize'] + ',' + article_data['css']['narrativColorResize'] + ')'
-
-			}
-
-			function mOutVolumeInput() {
-				volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorResize'] + ',' + article_data['css']['narrativColorResize'] + ')'
-			}
 		}
 
+	} else {
+		console.log('y')
+		player_section.classList.remove('bg_light')
+		player_section.style.backgroundColor = article_data['css']['narrativBackgroundColorResize'];
+		volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorResize'] + ',' + article_data['css']['narrativColorResize'] + ')'
+		volumeInput.addEventListener("mouseover", mOverVolumeInput, false);
+		volumeInput.addEventListener("mouseout", mOutVolumeInput, false);
 
+		function mOverVolumeInput() {
+			volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorResize'] + ',' + article_data['css']['narrativColorResize'] + ')'
 
+		}
 
+		function mOutVolumeInput() {
+			volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorResize'] + ',' + article_data['css']['narrativColorResize'] + ')'
+		}
 	}
 
-	var player = document.getElementById("narrativ-player_here");
-	var sticky = player.offsetTop + player.clientHeight + 70;
 
-	window.onscroll = function () {
-		if (window.pageYOffset > sticky) {
-			player.classList.add("narrativ-sticky");
-		} else {
-			player.classList.remove("narrativ-sticky");
-		}
-	};
+
+
+}
+
+var player = document.getElementById("narrativ-player_here");
+var sticky = player.offsetTop + player.clientHeight + 70;
+
+window.onscroll = function () {
+	if (window.pageYOffset > sticky) {
+		player.classList.add("narrativ-sticky");
+	} else {
+		player.classList.remove("narrativ-sticky");
+	}
+};
 }
 
 // =============================
