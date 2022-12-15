@@ -286,9 +286,9 @@ function insert_narrativ_player() {
 			var value = ((bufferedEnd / duration) * 100);
 			if (duration > 0) {
 				document.getElementById('narrativ-buffered-amount').style.width = ((bufferedEnd / duration) * 100) + "%";
-				if ( value < 100) {
-				document.getElementById('narrativ-buffered-amount').style.width = "100%";
-			}
+			// 	if ( value < 100) {
+			// 	document.getElementById('narrativ-buffered-amount').style.width = "100%";
+			// }
 		}
 	});
 
