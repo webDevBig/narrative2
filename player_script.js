@@ -196,6 +196,9 @@ function insert_narrativ_player() {
 
 	const timeline = document.createElement("div");
 	timeline.setAttribute("class", "narrativ-timeline narrativ-buffered")
+	const timeline2 = document.createElement("div");
+	timeline2.setAttribute("class", "narrativ-buffered2")
+	timeline2.setAttribute("id", "narrativ-buffered2")
 
 
 	const progress = document.createElement("input");
@@ -221,7 +224,7 @@ function insert_narrativ_player() {
 		progress.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgress'] + ',' + article_data['css']['narrativColorProgress'] + ')'
 	}
 
-	timeline.appendChild(progress);
+	timeline.append(timeline2, progress);
 	audio_player.append(currentTime, timeline, durationTime)
 	// **** finish audio player
 
@@ -351,8 +354,21 @@ function insert_narrativ_player() {
 		// }
 		var bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
 		var duration = audio.duration;
+		const numRanges = audio.buffered.length;
+		// console.log(numRanges)
+
 		if (duration > 0) {
-			document.getElementById('narrativ-buffered-amount').style.width = ((bufferedEnd / duration) * 100) + "%";
+			
+			// document.getElementById('narrativ-buffered-amount').style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorFill'] + ', rgba(144, 174, 255, 0.5))'
+			// document.getElementById('narrativ-buffered-amount').style.width = ((bufferedEnd / duration) * 100) + "%";
+			document.getElementById('narrativ-buffered2').style.width = ((bufferedEnd / duration) * 100) + "%";
+			if (audio.buffered.start(0) === 0 && audio.buffered.end(0) === audio.duration) {
+				// The one range starts at the beginning and ends at
+				// the end of the video, so the whole thing is loaded
+				// console.log('all')
+
+			}
+
 		}
 	};
 
@@ -376,6 +392,8 @@ function insert_narrativ_player() {
 			const max = seek_slider.max;
 			const val = seek_slider.value;
 
+			
+			
 			seek_slider.style.backgroundSize = ((val - min) * 100) / (max - min) + "% 100%";
 			_bufferProgress(audio);
 

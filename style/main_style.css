@@ -589,6 +589,14 @@ header .nav span {
   min-width: 30px;
   cursor: default;
 }
+.narrativ-audio_player #narrativ-buffered2 {
+  height: 4px;
+  border-radius: 16px;
+  background: #90AEFF;
+  position: absolute;
+  left: 0;
+  z-index: 0;
+}
 .narrativ-audio_player .narrativ-timeline {
   background: rgba(144, 174, 255, 0.5);
   width: 446px;
@@ -602,17 +610,19 @@ header .nav span {
 .narrativ-audio_player .narrativ-timeline .narrativ-seek_slider {
   -webkit-appearance: none;
   height: 4px;
-  background: #90AEFF;
+  background: rgba(144, 174, 255, 0);
   border-radius: 16px;
   background-image: linear-gradient(#4169E1, #4169E1);
   background-size: 0% 100%;
   background-repeat: no-repeat;
   display: inline-block;
   vertical-align: middle;
+  position: relative;
+  z-index: 1;
 }
 .narrativ-audio_player .narrativ-timeline .narrativ-seek_slider#narrativ-buffered-amount {
-  background-color: #90AEFF;
-  width: 13px;
+  background-color: rgba(144, 174, 255, 0);
+  width: 100%;
 }
 .narrativ-audio_player .narrativ-timeline:hover .narrativ-seek_slider {
   background-image: linear-gradient(#5B88FF, #5B88FF);
