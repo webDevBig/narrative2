@@ -279,34 +279,40 @@ function insert_narrativ_player() {
 
 	const playBtn = document.querySelector("#narrativ-playToggle");
 	const speepPopUP = document.querySelector("#narrativ-openSpeedPopUp");
+	
 
 	audio.addEventListener('progress', function() {
-		var bufferedEnd = audio.buffered.end(0);
+		var bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
 		var duration =  audio.duration;
-		// if (duration > 0) {
-		// 	console.log(bufferedEnd)
-		// 	console.log(duration)
-		// 	console.log(audio.buffered.length)
+		if (duration > 0) {
+			console.log(bufferedEnd)
+			console.log(duration)
+			console.log(audio.buffered.length)
 			
-		// 	document.getElementById('narrativ-buffered-amount').style.width = (audio.buffered.end(0)*100) + "%";
-		// //   document.getElementById('narrativ-buffered-amount').style.width = ((bufferedEnd / duration)*100) + "%";
-		// }
+			// document.getElementById('narrativ-buffered-amount').style.width = (audio.buffered.end(0)*100) + "%";
+		  document.getElementById('narrativ-buffered-amount').style.width = ((bufferedEnd / duration)*100) + "%";
+		  console.log(document.getElementById('narrativ-buffered-amount').offsetWidth)
+		}
 
-		if(audio.buffered) {
-			// var buffered = audio.buffered;
-			if(buffered.length) {
-			  var loaded = Math.round(100 * bufferedEnd / audio.duration);
-			  if (audio.duration <= 30)
-			  {
-				document.getElementById('narrativ-buffered-amount').style.width = (bufferedEnd*100) + "%";
-			  }
-			  else{
-				document.getElementById('narrativ-buffered-amount').style.width = loaded + '%';
-			  }
+		// if(audio.buffered) {
+		// 	var buffered = audio.buffered;
+		// 	console.log(buffered)
+		// 	console.log(bufferedEnd)
+		// 	if(buffered.length) {
+		// 	  var loaded = Math.round(100 * bufferedEnd / audio.duration);
+		// 	  if (audio.duration <= 30)
+		// 	  {
+		// 		document.getElementById('narrativ-buffered-amount').style.width = "100%";
+		// 		console.log(document.getElementById('narrativ-buffered-amount').offsetWidth)
+		// 	  }
+		// 	  else{
+		// 		document.getElementById('narrativ-buffered-amount').style.width = loaded + '%';
+		// 		console.log(document.getElementById('narrativ-buffered-amount').offsetWidth)
+		// 	  }
 			 
 			  
-			}
-		  }
+		// 	}
+		//   }
 	  });
 
 
@@ -424,6 +430,16 @@ function seekTo() {
 	audio.currentTime = seekto;
 
 	seek_slider.style.backgroundSize = audio.currentTime / audio.duration * 100 + "% 100%";
+
+	// if ((seekto >= 1) && (seekto <= progressBarWidth)) {
+	// 	progressBarIndicator.style.left = newPosition + ".px";
+	//   }
+	//   if (seekto < 0) {
+	// 	progressBarIndicator.style.left = "0";
+	//   }
+	//   if (seekto > progressBarWidth) {
+	// 	progressBarIndicator.style.left = progressBarWidth + "px";
+	//   }
 
 }
 
@@ -573,7 +589,7 @@ function accordionClick() {
 	this.classList.toggle('narrativ-colapse')
 
 	if (!player_section.classList.contains('bg_light')) {
-		console.log('no')
+		
 		player_section.classList.add('bg_light')
 		player_section.style.backgroundColor = article_data['css']['narrativBackgroundColor'];
 		volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorProgress'] + ',' + article_data['css']['narrativColorProgress'] + ')'
@@ -590,7 +606,7 @@ function accordionClick() {
 		}
 
 	} else {
-		console.log('y')
+		
 		player_section.classList.remove('bg_light')
 		player_section.style.backgroundColor = article_data['css']['narrativBackgroundColorResize'];
 		volumeInput.style.backgroundImage = ' linear-gradient(' + article_data['css']['narrativColorResize'] + ',' + article_data['css']['narrativColorResize'] + ')'
