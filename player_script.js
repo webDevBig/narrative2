@@ -426,20 +426,24 @@ function insert_narrativ_player() {
 	s.addEventListener("input", seekTo);
 
 	function seekTo() {
+		var progressBarWidth = 0;
 		let seekto = audio.duration * (seek_slider.value / 100);
 		audio.currentTime = seekto;
 
 		seek_slider.style.backgroundSize = audio.currentTime / audio.duration * 100 + "% 100%";
 
-		// if ((seekto >= 1) && (seekto <= progressBarWidth)) {
-		// 	progressBarIndicator.style.left = newPosition + ".px";
-		//   }
-		//   if (seekto < 0) {
-		// 	progressBarIndicator.style.left = "0";
-		//   }
-		//   if (seekto > progressBarWidth) {
-		// 	progressBarIndicator.style.left = progressBarWidth + "px";
-		//   }
+		progressBarWidth = document.getElementById('narrativ-buffered-amount').offsetWidth - (seek_slider.value / 100);
+
+		if ((seekto >= 1) && (seekto <= progressBarWidth)) {
+			// progressBarIndicator.style.left = newPosition + ".px";
+			seek_slider.style.backgroundSize = audio.currentTime / audio.duration * 100 + "% 100%";
+		  }
+		  if (seekto < 0) {
+			seek_slider.style.backgroundSize = "0% 100%";
+		  }
+		  if (seekto > progressBarWidth) {
+			seek_slider.style.backgroundSize = progressBarWidth + "% 100%";
+		  }
 
 	}
 
