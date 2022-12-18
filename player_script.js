@@ -345,8 +345,10 @@ function insert_narrativ_player() {
 	var _bufferProgress = function (audio) {
 		var bufferedTime = (audio.buffered.end(0) * 100) / audio.duration;
 		// var progressBuffer = _elements.progressBar.children[0].children[0].children[0];
+		if(audio.buffered.length>0){
 
 		document.getElementById('narrativ-buffered-amount').style.width = bufferedTime + "%";
+		}
 	};
 
 
