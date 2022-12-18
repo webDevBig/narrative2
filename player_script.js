@@ -282,7 +282,7 @@ function insert_narrativ_player() {
 	
 
 	audio.addEventListener('progress', function() {
-		var bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
+		var bufferedEnd = Math.abs(audio.buffered.end(audio.buffered.length - 1));
 		var duration =  audio.duration;
 		if (duration > 0) {
 			console.log(bufferedEnd)
@@ -290,7 +290,7 @@ function insert_narrativ_player() {
 			console.log(audio.buffered.length)
 			
 			// document.getElementById('narrativ-buffered-amount').style.width = (audio.buffered.end(0)*100) + "%";
-		  document.getElementById('narrativ-buffered-amount').style.width = ((bufferedEnd / duration)*100) + "%";
+		  document.getElementById('narrativ-buffered-amount').style.width = (bufferedEnd*100 / duration) + "%";
 		  console.log(document.getElementById('narrativ-buffered-amount').offsetWidth)
 		}
 
