@@ -16,7 +16,7 @@ const article_data = {
 		"id": "article_title_box"
 	},
 	"audio_player_delay": "1000",
-	"article_title": "Narrativ Olena Test Article",
+	"article_title": "Narrativ Olena Test Article1",
 	"article_audio_src": "https://narrativ-audio-bucket.s3.amazonaws.com/f4f661b7-4c49-4d24-becc-197336ac94f0/8e3eebfd-2a0b-4fc4-a016-4aaa0957c1d0-nina.mp3",
 	"pre_roll": "https://od-spy.live.streamtheworld.com/assets/30-seconds-spot-128kbs.mp3?stid=797753&requestId=98506526-f895-409f-a000-a2ac7ec3a20d&cb=1669864345680"
 }
