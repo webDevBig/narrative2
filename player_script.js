@@ -293,12 +293,12 @@ function insert_narrativ_player() {
 		// }
 
 		if(audio.buffered) {
-			var buffered = audio.buffered;
+			// var buffered = audio.buffered;
 			if(buffered.length) {
-			  var loaded = Math.round(100 * buffered.end(0) / audio.duration);
+			  var loaded = Math.round(100 * bufferedEnd / audio.duration);
 			  if (audio.duration <= 30)
 			  {
-				document.getElementById('narrativ-buffered-amount').style.width = (audio.buffered.end(0)*100) + "%";
+				document.getElementById('narrativ-buffered-amount').style.width = (bufferedEnd*100) + "%";
 			  }
 			  else{
 				document.getElementById('narrativ-buffered-amount').style.width = loaded + '%';
