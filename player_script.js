@@ -280,28 +280,33 @@ function insert_narrativ_player() {
 	const playBtn = document.querySelector("#narrativ-playToggle");
 	const speepPopUP = document.querySelector("#narrativ-openSpeedPopUp");
 
-	// audio.addEventListener('progress', function () {
-	// 		var bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
-	// 		var duration = audio.duration;
-	// 		var value = ((bufferedEnd / duration) * 100);
-	// 		var c = document.getElementById('narrativ-buffered-amount')
-	// 		if (duration > 0) {
-	// 			document.getElementById('narrativ-buffered-amount').style.width = ((bufferedEnd / duration) * 100) + "%";
-		
-			  
-	// 	}
-	// });
 	audio.addEventListener('progress', function() {
 		var bufferedEnd = audio.buffered.end(0);
 		var duration =  audio.duration;
-		if (duration > 0) {
-			console.log(bufferedEnd)
-			console.log(duration)
-			console.log(audio.buffered.length)
+		// if (duration > 0) {
+		// 	console.log(bufferedEnd)
+		// 	console.log(duration)
+		// 	console.log(audio.buffered.length)
 			
-			document.getElementById('narrativ-buffered-amount').style.width = (audio.buffered.end(0)*100) + "%";
-		//   document.getElementById('narrativ-buffered-amount').style.width = ((bufferedEnd / duration)*100) + "%";
-		}
+		// 	document.getElementById('narrativ-buffered-amount').style.width = (audio.buffered.end(0)*100) + "%";
+		// //   document.getElementById('narrativ-buffered-amount').style.width = ((bufferedEnd / duration)*100) + "%";
+		// }
+
+		if(audio.buffered) {
+			var buffered = audio.buffered;
+			if(buffered.length) {
+			  var loaded = Math.round(100 * buffered.end(0) / audio.duration);
+			  if (audio.duration <= 30)
+			  {
+				document.getElementById('narrativ-buffered-amount').style.width = (audio.buffered.end(0)*100) + "%";
+			  }
+			  else{
+				document.getElementById('narrativ-buffered-amount').style.width = loaded + '%';
+			  }
+			 
+			  
+			}
+		  }
 	  });
 
 
@@ -338,7 +343,7 @@ function loadTrack(track_index) {
 	current_title.textContent = music_list[track_index].name;
 
 	audio.load();
-	console.log(audio.buffered)
+	// console.log(audio.buffered)
 	updateTimer = setInterval(setUpdate, 0.1);
 }
 
@@ -361,9 +366,7 @@ function setUpdate() {
 		const max = seek_slider.max;
 		const val = seek_slider.value;
 
-
 		seek_slider.style.backgroundSize = ((val - min) * 100) / (max - min) + "% 100%";
-
 
 		let currentMinutes = Math.floor(audio.currentTime / 60);
 		let currentSeconds = Math.floor(audio.currentTime - currentMinutes * 60);
@@ -420,7 +423,7 @@ function seekTo() {
 	let seekto = audio.duration * (seek_slider.value / 100);
 	audio.currentTime = seekto;
 
-	seek_slider.style.backgroundSize = audio.currentTime / audio.duration * 100 + "% 100%"
+	seek_slider.style.backgroundSize = audio.currentTime / audio.duration * 100 + "% 100%";
 
 }
 
