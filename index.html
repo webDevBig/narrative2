@@ -12,13 +12,14 @@
 <body>
     <header>
         <div class="content">
-            <img alt="logo" src="img/main-logo.svg" />
-            <div class="nav">
+            <!-- <img alt="logo" src="img/4.png" /> -->
+            <div class="logo" id="image-container"></div>
+            <!-- <div class="nav">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <img alt="logo" src="img/mobile-header.svg" class="mobile" />
+            <img alt="logo" src="img/mobile-header.svg" class="mobile" /> -->
         </div>
     </header>
     <div class="title_section mobile ">
@@ -35,7 +36,7 @@
         <p class="date_text">Oct 14 • 3 min read</p>
     </div>
     <h1 class="title" id="article_title_box">TOP 10 BINGE-WORTHY SERIES</h1>
- 
+
     <div class="social_box mobile">
         <img alt="facebook" src="img/facebook.svg" />
         <img alt="twitter" src="img/twitter.svg" />
@@ -87,7 +88,7 @@
             Jasper G. Goodman ’23Managing Editor of the 149th Guard<br>
             Amy X. Zhou ’23Business Manager of the 149th Guard</p>
     </div>
-   
+
     <div class="article_box">
         <h2 class="h2_title">By Astride Adrien</h2>
         <p class="text">As college students, we are accustomed to going to class, taking down information, processing
@@ -157,6 +158,35 @@
     </div>
 
     <script src="player_script.js"></script>
+
+    <script>
+        var imageUrls = [
+            'img/1.png',
+            'img/2.png',
+            'img/3.png',
+            'img/4.png'
+        ];
+
+        function preloadImages(urls) {
+            for (var i = 0; i < urls.length; i++) {
+                var img = new Image();
+                img.src = urls[i];
+            }
+        }
+        preloadImages(imageUrls);
+
+        var imageContainer = document.getElementById('image-container');
+        var currentImageIndex = 0;
+
+        function changeImage() {
+            imageContainer.style.backgroundImage = 'url(' + imageUrls[currentImageIndex] + ')';
+            currentImageIndex++;
+            if (currentImageIndex >= imageUrls.length) {
+                currentImageIndex = 0;
+            }
+        }
+        setInterval(changeImage, 1500);
+    </script>
 </body>
 
 </html>
